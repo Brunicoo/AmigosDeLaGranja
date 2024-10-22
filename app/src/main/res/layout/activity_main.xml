@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/campo">
+
+    <ImageView
+        android:id="@+id/handImageView"
+        android:layout_width="340dp"
+        android:layout_height="328dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="-39dp"
+        android:layout_marginLeft="250dp"
+        android:layout_marginTop="150dp"
+        android:layout_marginEnd="820dp"
+        android:layout_marginBottom="99dp"
+        android:src="@drawable/mano" />
+
+    <ImageView
+        android:id="@+id/animalImageView"
+        android:layout_width="757dp"
+        android:layout_height="654dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="272dp"
+        android:layout_marginLeft="250dp"
+        android:layout_marginTop="150dp"
+        android:layout_marginEnd="61dp"
+        android:layout_marginBottom="10dp"/>
+
+    <ImageView
+        android:id="@+id/bubleGif"
+        android:layout_width="848dp"
+        android:layout_height="800dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="272dp"
+        android:layout_marginLeft="250dp"
+        android:layout_marginTop="-4dp"
+        android:layout_marginEnd="-1dp"
+        android:layout_marginBottom="3dp"
+        android:src="@drawable/burbujas"
+        android:visibility="invisible" />
+</RelativeLayout>
