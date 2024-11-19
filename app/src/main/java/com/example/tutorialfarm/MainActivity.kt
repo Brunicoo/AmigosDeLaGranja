@@ -1,6 +1,7 @@
 package com.example.tutorialfarm
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.widget.ImageView
 import androidx.activity.enableEdgeToEdge
@@ -10,6 +11,8 @@ import android.media.MediaPlayer
 import android.os.Build
 import android.provider.MediaStore.Audio.Media
 import android.view.View
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
 import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.RequiresApi
@@ -24,59 +27,32 @@ import kotlin.random.Random
 import kotlin.random.Random.Default.nextInt
 
 class MainActivity : AppCompatActivity() {
+    @SuppressLint("MissingInflatedId")
+    @RequiresApi(Build.VERSION_CODES.P)
+    private lateinit var audio: MediaPlayer
     @RequiresApi(Build.VERSION_CODES.P)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_main)
 
-        val handImageView = findViewById<ImageView>(R.id.handImageView)
-        val gifImage = handImageView.drawable as AnimatedImageDrawable
-        val animalImageView = findViewById<ImageView>(R.id.animalImageView)
-        val animalSound = MediaPlayer.create(this, R.raw.vaca_sonido)
+        // ** cojer la variable userName ** //
 
-        gifImage.start()
+        val imageHector = findViewById(R.id.imageHector) as ImageView
 
-        CoroutineScope(Dispatchers.Main).launch {
-            showAnimals(
-                animalImageView,
-                gifImage,
-                animalSound,
-                handImageView
-            )
-        }
-    }
+        val moveAnimation: Animation = AnimationUtils.loadAnimation(this, R.anim.move_up_down)
+        imageHector.startAnimation(moveAnimation)
 
-    @RequiresApi(Build.VERSION_CODES.P)
-    private suspend fun showAnimals(
-        animalImageView: ImageView,
-        gifImage: AnimatedImageDrawable,
-        animalSound : MediaPlayer,
-        handImageView: ImageView
-    ) {
-            animalImageView.visibility = View.VISIBLE
-            handImageView.visibility = View.VISIBLE
-            animalImageView.isClickable = true
+         audio = MediaPlayer.create(this, R.raw.audio_hector)
+        audio.start()
 
-            waitForClick(animalImageView)
-            animalImageView.isClickable = false
+        audio.setOnCompletionListener {
+            audio.stop()
+            val intent = Intent(this, SecondActivity :: class.java)
+            //intent.putExtra(SecondActivity.userNameConstants.userName, userName)
+            startActivity(intent)
 
-            gifImage.stop()
-
-            animalSound.start()
-
-            animalSound.setOnCompletionListener {
-                it.release()
-                finish()
-            }
-        }
-
-    @RequiresApi(Build.VERSION_CODES.P)
-    private suspend fun waitForClick(imageView: ImageView) {
-        suspendCancellableCoroutine { continuation ->
-            imageView.setOnClickListener {
-                continuation.resume(Unit)
-            }
+            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
         }
     }
 }
