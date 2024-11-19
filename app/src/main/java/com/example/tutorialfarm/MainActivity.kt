@@ -20,6 +20,8 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.suspendCancellableCoroutine
 import kotlin.coroutines.resume
+import kotlin.random.Random
+import kotlin.random.Random.Default.nextInt
 
 class MainActivity : AppCompatActivity() {
     @RequiresApi(Build.VERSION_CODES.P)
@@ -31,30 +33,7 @@ class MainActivity : AppCompatActivity() {
         val handImageView = findViewById<ImageView>(R.id.handImageView)
         val gifImage = handImageView.drawable as AnimatedImageDrawable
         val animalImageView = findViewById<ImageView>(R.id.animalImageView)
-        val bubleSound = MediaPlayer.create(this, R.raw.burbujas_sonido)
-        val bubleImageView = findViewById<ImageView>(R.id.bubleGif)
-        val bubleGif = bubleImageView.drawable as AnimatedImageDrawable
-        val animalsJPG: ArrayList<Int> = arrayListOf(
-            R.drawable.vaca,
-            R.drawable.cerdo,
-            R.drawable.gallina,
-            R.drawable.conejo,
-            R.drawable.oveja,
-            R.drawable.caballo,
-            R.drawable.perro,
-            R.drawable.pato
-        )
-
-        val soundsMP3: ArrayList<Int> = arrayListOf(
-            R.raw.vaca_sonido,
-            R.raw.cerdo_sonido,
-            R.raw.gallina_sonido,
-            R.raw.rabbit,
-            R.raw.oveja,
-            R.raw.caballo_sonido,
-            R.raw.perro_sonido,
-            R.raw.pato_sonido
-        )
+        val animalSound = MediaPlayer.create(this, R.raw.vaca_sonido)
 
         gifImage.start()
 
@@ -62,11 +41,8 @@ class MainActivity : AppCompatActivity() {
             showAnimals(
                 animalImageView,
                 gifImage,
-                animalsJPG,
-                soundsMP3,
-                bubleGif,
-                bubleSound,
-                bubleImageView
+                animalSound,
+                handImageView
             )
         }
     }
@@ -75,64 +51,27 @@ class MainActivity : AppCompatActivity() {
     private suspend fun showAnimals(
         animalImageView: ImageView,
         gifImage: AnimatedImageDrawable,
-        animalsJPG: ArrayList<Int>,
-        soundsMP3: ArrayList<Int>,
-        bubleGif: AnimatedImageDrawable,
-        bubleSound: MediaPlayer,
-        bubleImageView: ImageView
+        animalSound : MediaPlayer,
+        handImageView: ImageView
     ) {
-        for (i in animalsJPG.indices) {
-            animalImageView.isClickable = true
-            animalImageView.setImageResource(animalsJPG[i])
             animalImageView.visibility = View.VISIBLE
+            handImageView.visibility = View.VISIBLE
+            animalImageView.isClickable = true
 
             waitForClick(animalImageView)
             animalImageView.isClickable = false
 
             gifImage.stop()
 
-            val animalSound = MediaPlayer.create(animalImageView.context, soundsMP3[i])
             animalSound.start()
 
             animalSound.setOnCompletionListener {
                 it.release()
-            }
-
-            delay(3000)
-
-            if (i<animalsJPG.size -1) {
-                animalImageView.visibility = View.GONE
-                bubleTransition(bubleGif, bubleSound, bubleImageView)
-                delay(2000)
-                bubleImageView.visibility = View.GONE
-                //bubleSound.stop()
-                bubleGif.stop()
-                gifImage.start()
-            }
-
-            if (i>=animalsJPG.size - 1){
                 finish()
             }
         }
-    }
-
 
     @RequiresApi(Build.VERSION_CODES.P)
-    private fun bubleTransition(
-        bubleGif: AnimatedImageDrawable,
-        bubleSound: MediaPlayer,
-        bubleImageView: ImageView
-    ) {
-        bubleImageView.visibility = View.VISIBLE
-        //bubleSound.start() me peta el programa si pongo este sonido
-        bubleGif.stop()
-        bubleGif.start()
-
-        bubleSound.setOnCompletionListener {
-            it.release()
-        }
-    }
-
     private suspend fun waitForClick(imageView: ImageView) {
         suspendCancellableCoroutine { continuation ->
             imageView.setOnClickListener {
