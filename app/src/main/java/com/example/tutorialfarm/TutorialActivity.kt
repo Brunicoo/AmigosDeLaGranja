@@ -23,12 +23,16 @@ class TutorialActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.second_activity)
+        setContentView(R.layout.activity_tutorial)
 
         val handImageView = findViewById<ImageView>(R.id.handImageView)
         val gifImage = handImageView.drawable as AnimatedImageDrawable
         val animalImageView = findViewById<ImageView>(R.id.animalImageView)
         val animalSound = MediaPlayer.create(this, R.raw.vaca_sonido)
+
+        val menuSound = MediaPlayer.create(this, R.raw.menu_sound)
+        menuSound.start()
+        //6menuSound.isLooping = true
 
         gifImage.start()
 

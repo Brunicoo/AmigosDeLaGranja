@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/back_log_in"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    android:padding="16dp">
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="94dp"
+        android:fontFamily="sans-serif-black"
+        android:gravity="center"
+        android:layout_marginTop="40dp"
+        android:text="INICIO DE SESIÓN"
+        android:textAlignment="center"
+        android:textColor="#FFFFFF"
+        android:textSize="60sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="40dp"
+        android:fontFamily=""
+        android:text="NOMBRE"
+        android:textAlignment="center"
+        android:textColor="@color/blueFS"
+        android:textSize="40dp"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/userName"
+        android:layout_width="500dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:textSize="25dp"
+        android:background="@drawable/rounded_borders"
+        android:padding="10dp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="50dp"
+        android:fontFamily=""
+        android:text="DIFICULTAD"
+        android:textAlignment="center"
+        android:textColor="@color/blueFS"
+        android:textSize="40dp"
+        android:textStyle="bold"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:padding="16dp">
+
+        <Button
+            android:id="@+id/btonEasy"
+            android:layout_width="200dp"
+            android:layout_height="80dp"
+            android:text="FÁCIL"
+            android:textSize="30dp"
+            android:textColor="@color/white"
+            android:background="@drawable/rectangle_borders"
+            app:backgroundTint="@null"/>
+
+        <Button
+            android:id="@+id/btonHard"
+            android:layout_width="200dp"
+            android:layout_height="80dp"
+            android:layout_marginLeft="40dp"
+            android:text="DIFÍCIL"
+            android:textSize="30dp"
+            android:textColor="@color/white"
+            android:background="@drawable/rectangle_borders2"
+            app:backgroundTint="@null"/>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btonStart"
+        android:layout_width="250dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="40dp"
+        android:gravity="center"
+        android:text="JUGAR"
+        android:textSize="30dp"
+        android:textColor="@color/white"
+        android:background="@drawable/rounded_borders2"
+        app:backgroundTint="@null"/>
+</LinearLayout>

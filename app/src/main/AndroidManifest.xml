@@ -13,20 +13,31 @@
         android:theme="@style/Theme.TutorialFarm"
         tools:targetApi="31">
         <activity
-            android:name=".AudioActivity"
+            android:name=".LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+                <activity
+                    android:name=".TutorialActivity"
+                    android:exported="true">
+                </activity>
 
-        <activity
-            android:name=".TutorialActivity"
-            android:exported="true">
-        </activity>
+                <activity
+                    android:name=".EasyActivity"
+                    android:exported="true">
+                </activity>
 
-    </application>
+                <activity
+                    android:name=".HardActivity"
+                    android:exported="true">
+                </activity>
 
-</manifest>
+                <activity
+                    android:name=".AudioActivity"
+                    android:exported="true">
+                </activity>
+            </application>
+        </manifest>
