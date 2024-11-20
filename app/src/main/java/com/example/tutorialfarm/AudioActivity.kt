@@ -6,27 +6,13 @@ import android.os.Bundle
 import android.widget.ImageView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import android.graphics.drawable.AnimatedImageDrawable
 import android.media.MediaPlayer
 import android.os.Build
-import android.provider.MediaStore.Audio.Media
-import android.view.View
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
-import android.widget.TextView
-import android.widget.Toast
 import androidx.annotation.RequiresApi
-import androidx.core.view.isVisible
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.suspendCancellableCoroutine
-import kotlin.coroutines.resume
-import kotlin.random.Random
-import kotlin.random.Random.Default.nextInt
 
-class MainActivity : AppCompatActivity() {
+class AudioActivity : AppCompatActivity() {
     @SuppressLint("MissingInflatedId")
     @RequiresApi(Build.VERSION_CODES.P)
     private lateinit var audio: MediaPlayer
@@ -39,16 +25,29 @@ class MainActivity : AppCompatActivity() {
         // ** cojer la variable userName ** //
 
         val imageHector = findViewById(R.id.imageHector) as ImageView
+        val btonSkip = findViewById(R.id.buttonSkip) as ImageView
 
         val moveAnimation: Animation = AnimationUtils.loadAnimation(this, R.anim.move_up_down)
         imageHector.startAnimation(moveAnimation)
 
+        val buttonAnimation = AnimationUtils.loadAnimation(this, R.anim.scale_animation)
+
          audio = MediaPlayer.create(this, R.raw.audio_hector)
         audio.start()
 
+        btonSkip.setOnClickListener(){
+            audio.stop()
+            btonSkip.startAnimation(buttonAnimation)
+            val intent = Intent(this, TutorialActivity :: class.java)
+            //intent.putExtra(SecondActivity.userNameConstants.userName, userName)
+            startActivity(intent)
+
+            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+        }
+
         audio.setOnCompletionListener {
             audio.stop()
-            val intent = Intent(this, SecondActivity :: class.java)
+            val intent = Intent(this, TutorialActivity :: class.java)
             //intent.putExtra(SecondActivity.userNameConstants.userName, userName)
             startActivity(intent)
 

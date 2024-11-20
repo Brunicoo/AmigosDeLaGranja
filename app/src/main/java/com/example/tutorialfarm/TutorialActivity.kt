@@ -15,7 +15,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.suspendCancellableCoroutine
 import kotlin.coroutines.resume
 
-class SecondActivity : AppCompatActivity() {
+class TutorialActivity : AppCompatActivity() {
     object userNameConstants{
         const val userName = "USER"
     }
