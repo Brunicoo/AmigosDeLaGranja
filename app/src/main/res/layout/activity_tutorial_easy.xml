@@ -4,7 +4,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/campo">
+    android:background="@drawable/fondo_granja_tutorial">
 
     <ImageView
         android:id="@+id/handImageView"
@@ -15,33 +15,20 @@
         android:layout_marginStart="-39dp"
         android:layout_marginLeft="250dp"
         android:layout_marginTop="150dp"
-        android:layout_marginEnd="819dp"
-        android:layout_marginBottom="109dp"
-        android:src="@drawable/mano"
-       />
+        android:layout_marginEnd="723dp"
+        android:layout_marginBottom="56dp"
+        android:src="@drawable/mano" />
 
     <ImageView
         android:id="@+id/animalImageView"
-        android:layout_width="828dp"
-        android:layout_height="718dp"
+        android:layout_width="755dp"
+        android:layout_height="547dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:layout_marginStart="272dp"
         android:layout_marginLeft="250dp"
         android:layout_marginTop="150dp"
-        android:layout_marginEnd="19dp"
-        android:layout_marginBottom="-5dp"
-        android:src="@drawable/vaca"
-        />
-
-    <ImageView
-        android:layout_width="1188dp"
-        android:layout_height="794dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="62dp"
-        android:layout_marginLeft="250dp"
-        android:layout_marginBottom="41dp"
-        android:src="@drawable/granjero"
-        android:visibility="invisible" />
+        android:layout_marginEnd="33dp"
+        android:layout_marginBottom="34dp"
+        android:src="@drawable/vaca" />
 </RelativeLayout>

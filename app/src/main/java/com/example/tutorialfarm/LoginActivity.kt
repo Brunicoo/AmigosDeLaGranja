@@ -25,7 +25,9 @@ class LoginActivity : AppCompatActivity() {
         val btonStart = findViewById(R.id.btonStart) as Button
         val userNameEditText = findViewById(R.id.userName) as EditText
         var difficulty: Boolean? = null
-        val playersList: MutableList<Player>
+        val playersList: MutableList<Player>? = null
+        val tries : MutableList<Try>? = null
+        var index : Int
 
         /*leer el json y sino existe el usuario crear este nuevo y reescribirlo en el json directamente*/
 
@@ -52,9 +54,10 @@ class LoginActivity : AppCompatActivity() {
                 userNameEditText.startAnimation(shake);
                 Toast.makeText(this, "¡You must enter your name!", Toast.LENGTH_LONG).show()
             } else {
-                val userName = userNameEditText.text
+                var userName = userNameEditText.text
                 if (difficulty != null) {
                     if (difficulty == false) {
+                        index = checkUser(playersList!!, tries!!, userName.toString())
                         val loginSound = MediaPlayer.create(this, R.raw.login_sound)
                         loginSound.start()
                         val intent = Intent(this, EasyActivity::class.java)
@@ -88,5 +91,26 @@ class LoginActivity : AppCompatActivity() {
                 }
             }
         }
+    }
+
+    private fun checkUser(playersList: MutableList<Player>, tries : MutableList<Try>, userName : String) : Int
+    {
+        val userExists = playersList.find { it.name.equals(userName, ignoreCase = true) }
+        var index : Int
+
+        if (userExists == null)
+        {
+            val player = Player(userName, tries)
+            playersList.add(player)
+            index = playersList.indexOfFirst { it.name == player.name }
+
+        } else
+        {
+            val player = userExists
+            index = playersList.indexOfFirst { it.name == player.name }
+
+
+        }
+        return index
     }
 }

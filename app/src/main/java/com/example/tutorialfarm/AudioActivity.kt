@@ -26,28 +26,29 @@ class AudioActivity : AppCompatActivity() {
 
         val imageHector = findViewById(R.id.imageHector) as ImageView
         val btonSkip = findViewById(R.id.buttonSkip) as ImageView
+        val clickSound = MediaPlayer.create(this, R.raw.menu_sound)
 
         val moveAnimation: Animation = AnimationUtils.loadAnimation(this, R.anim.move_up_down)
         imageHector.startAnimation(moveAnimation)
 
-        val buttonAnimation = AnimationUtils.loadAnimation(this, R.anim.scale_animation)
-
          audio = MediaPlayer.create(this, R.raw.audio_hector)
-        audio.start()
+         audio.start()
 
         btonSkip.setOnClickListener(){
+            clickSound.start()
             audio.stop()
-            btonSkip.startAnimation(buttonAnimation)
-            val intent = Intent(this, TutorialActivity :: class.java)
+            audio.release()
+            val intent = Intent(this, TutorialEasyActivity :: class.java)
             //intent.putExtra(SecondActivity.userNameConstants.userName, userName)
             startActivity(intent)
 
-            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
         }
 
         audio.setOnCompletionListener {
             audio.stop()
-            val intent = Intent(this, TutorialActivity :: class.java)
+            it.release()
+            val intent = Intent(this, TutorialEasyActivity :: class.java)
             //intent.putExtra(SecondActivity.userNameConstants.userName, userName)
             startActivity(intent)
 

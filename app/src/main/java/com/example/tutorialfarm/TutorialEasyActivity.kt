@@ -1,10 +1,11 @@
 package com.example.tutorialfarm
 
-import android.graphics.drawable.AnimatedImageDrawable
 import android.media.MediaPlayer
 import android.os.Build
 import android.os.Bundle
 import android.view.View
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
 import android.widget.ImageView
 import androidx.activity.enableEdgeToEdge
 import androidx.annotation.RequiresApi
@@ -15,7 +16,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.suspendCancellableCoroutine
 import kotlin.coroutines.resume
 
-class TutorialActivity : AppCompatActivity() {
+class TutorialEasyActivity : AppCompatActivity() {
     object userNameConstants{
         const val userName = "USER"
     }
@@ -23,23 +24,19 @@ class TutorialActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.activity_tutorial)
+        setContentView(R.layout.activity_tutorial_easy)
 
         val handImageView = findViewById<ImageView>(R.id.handImageView)
-        val gifImage = handImageView.drawable as AnimatedImageDrawable
         val animalImageView = findViewById<ImageView>(R.id.animalImageView)
         val animalSound = MediaPlayer.create(this, R.raw.vaca_sonido)
+        val moveAnimation: Animation = AnimationUtils.loadAnimation(this, R.anim.scale_animation)
 
-        val menuSound = MediaPlayer.create(this, R.raw.menu_sound)
-        menuSound.start()
-        //6menuSound.isLooping = true
+        handImageView.startAnimation(moveAnimation)
 
-        gifImage.start()
 
         CoroutineScope(Dispatchers.Main).launch {
             showAnimals(
                 animalImageView,
-                gifImage,
                 animalSound,
                 handImageView
             )
@@ -49,7 +46,6 @@ class TutorialActivity : AppCompatActivity() {
     @RequiresApi(Build.VERSION_CODES.P)
     private suspend fun showAnimals(
         animalImageView: ImageView,
-        gifImage: AnimatedImageDrawable,
         animalSound : MediaPlayer,
         handImageView: ImageView
     ) {
@@ -59,8 +55,6 @@ class TutorialActivity : AppCompatActivity() {
 
         waitForClick(animalImageView)
         animalImageView.isClickable = false
-
-        gifImage.stop()
 
         animalSound.start()
 

@@ -20,11 +20,18 @@ class EasyActivity : AppCompatActivity() {
         setContentView(R.layout.activity_easy)
 
         val btonEasy = findViewById(R.id.btonEasy) as Button
+        val loginSound = MediaPlayer.create(this, R.raw.login_sound)
 
         btonEasy.setOnClickListener()
         {
+            loginSound.start()
             val intent = Intent(this, AudioActivity::class.java)
             startActivity(intent)
+            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+            loginSound.setOnCompletionListener {
+                loginSound.stop()
+                it.release()
+            }
         }
     }
 }

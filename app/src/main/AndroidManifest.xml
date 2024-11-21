@@ -21,7 +21,7 @@
             </intent-filter>
         </activity>
                 <activity
-                    android:name=".TutorialActivity"
+                    android:name=".TutorialEasyActivity"
                     android:exported="true">
                 </activity>
 
