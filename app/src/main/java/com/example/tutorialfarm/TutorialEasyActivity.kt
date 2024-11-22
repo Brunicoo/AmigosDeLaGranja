@@ -3,6 +3,7 @@ package com.example.tutorialfarm
 import android.media.MediaPlayer
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
@@ -10,6 +11,7 @@ import android.widget.ImageView
 import androidx.activity.enableEdgeToEdge
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.widget.ConstraintSet.Layout
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -17,9 +19,12 @@ import kotlinx.coroutines.suspendCancellableCoroutine
 import kotlin.coroutines.resume
 
 class TutorialEasyActivity : AppCompatActivity() {
-    object userNameConstants{
-        const val userName = "USER"
+
+    object constantsProject {
+        const val playersList = "PLAYERLIST"
+        const val index = "INDEX"
     }
+
     @RequiresApi(Build.VERSION_CODES.P)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,8 +36,11 @@ class TutorialEasyActivity : AppCompatActivity() {
         val animalSound = MediaPlayer.create(this, R.raw.vaca_sonido)
         val moveAnimation: Animation = AnimationUtils.loadAnimation(this, R.anim.scale_animation)
 
-        handImageView.startAnimation(moveAnimation)
+        val intent = intent
+        val playersList : MutableList<Player> = intent.getParcelableArrayListExtra(AudioActivity.constantsProject.playersList)!!
+        val index = intent.getIntExtra(AudioActivity.constantsProject.index, -1)
 
+        handImageView.startAnimation(moveAnimation)
 
         CoroutineScope(Dispatchers.Main).launch {
             showAnimals(
@@ -49,14 +57,12 @@ class TutorialEasyActivity : AppCompatActivity() {
         animalSound : MediaPlayer,
         handImageView: ImageView
     ) {
-        animalImageView.visibility = View.VISIBLE
-        handImageView.visibility = View.VISIBLE
-        animalImageView.isClickable = true
 
         waitForClick(animalImageView)
         animalImageView.isClickable = false
 
         animalSound.start()
+
 
         animalSound.setOnCompletionListener {
             it.release()
@@ -69,6 +75,7 @@ class TutorialEasyActivity : AppCompatActivity() {
         suspendCancellableCoroutine { continuation ->
             imageView.setOnClickListener {
                 continuation.resume(Unit)
+
             }
         }
     }

@@ -6,9 +6,11 @@ import androidx.appcompat.app.AppCompatActivity
 
 class HardActivity : AppCompatActivity() {
 
-    object userNameConstants {
-        const val userName = "USER"
+    object constantsProject {
+        const val playersList = "PLAYERLIST"
+        const val index = "INDEX"
     }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()

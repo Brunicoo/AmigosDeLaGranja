@@ -1,10 +1,7 @@
 package com.example.tutorialfarm
 
-import android.annotation.SuppressLint
-import android.content.Intent
 import android.media.MediaPlayer
 import android.os.Bundle
-import android.transition.Explode
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.Button
@@ -14,6 +11,11 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 
 class LoginActivity : AppCompatActivity() {
+
+    object constantsProject {
+        const val playersList = "PLAYERLIST"
+        const val index = "INDEX"
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,9 +27,9 @@ class LoginActivity : AppCompatActivity() {
         val btonStart = findViewById(R.id.btonStart) as Button
         val userNameEditText = findViewById(R.id.userName) as EditText
         var difficulty: Boolean? = null
-        val playersList: MutableList<Player>? = null
-        val tries : MutableList<Try>? = null
-        var index : Int
+        val playersList: MutableList<Player> = mutableListOf()
+        val tries: MutableList<Try> = mutableListOf()
+        var index: Int
 
         /*leer el json y sino existe el usuario crear este nuevo y reescribirlo en el json directamente*/
 
@@ -47,65 +49,55 @@ class LoginActivity : AppCompatActivity() {
             btonEasy.setBackgroundColor(R.drawable.rectangle_borders)
         }
 
-        btonStart.setOnClickListener()
-        {
+
+        btonStart.setOnClickListener {
+            val shake: Animation = AnimationUtils.loadAnimation(this, R.anim.shake)
             if (userNameEditText.text.isEmpty()) {
-                val shake: Animation = AnimationUtils.loadAnimation(this, R.anim.shake)
+
                 userNameEditText.startAnimation(shake);
+
                 Toast.makeText(this, "¡You must enter your name!", Toast.LENGTH_LONG).show()
             } else {
-                var userName = userNameEditText.text
+                val userName = userNameEditText.text.toString()
                 if (difficulty != null) {
+                    index = checkUser(playersList, tries, userName)
+
+                    val loginSound = MediaPlayer.create(this, R.raw.login_sound)
+                    loginSound.start()
+
                     if (difficulty == false) {
-                        index = checkUser(playersList!!, tries!!, userName.toString())
-                        val loginSound = MediaPlayer.create(this, R.raw.login_sound)
-                        loginSound.start()
-                        val intent = Intent(this, EasyActivity::class.java)
-                        intent.putExtra(EasyActivity.userNameConstants.userName, userName)
-                        startActivity(intent)
-                        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                        Tools.createActivity(this, EasyActivity::class.java, index, playersList)
+                        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+                    } else {
+                        Tools.createActivity(this, HardActivity::class.java, index, playersList)
+                    }
 
-                        loginSound.setOnCompletionListener {
-                            loginSound.stop()
-                        }
-
-                    } else if (difficulty == true) {
-                        val loginSound = MediaPlayer.create(this, R.raw.login_sound)
-                        loginSound.start()
-
-                        val intent = Intent(this, HardActivity::class.java)
-                        intent.putExtra(HardActivity.userNameConstants.userName, userName)
-                        startActivity(intent)
-                        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-
-                        loginSound.setOnCompletionListener {
-                            loginSound.stop()
-                        }
-
+                    loginSound.setOnCompletionListener {
+                        loginSound.stop()
                     }
                 } else {
-                    val shake: Animation = AnimationUtils.loadAnimation(this, R.anim.shake)
                     btonEasy.startAnimation(shake)
                     btonHard.startAnimation(shake)
-                    Toast.makeText(this, "¡You must select a difficulty!", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this, "¡You must choose the dificulty", Toast.LENGTH_LONG).show()
                 }
             }
         }
     }
 
-    private fun checkUser(playersList: MutableList<Player>, tries : MutableList<Try>, userName : String) : Int
-    {
+    private fun checkUser(
+        playersList: MutableList<Player>,
+        tries: MutableList<Try>,
+        userName: String
+    ): Int {
         val userExists = playersList.find { it.name.equals(userName, ignoreCase = true) }
-        var index : Int
+        var index: Int
 
-        if (userExists == null)
-        {
+        if (userExists == null) {
             val player = Player(userName, tries)
             playersList.add(player)
             index = playersList.indexOfFirst { it.name == player.name }
 
-        } else
-        {
+        } else {
             val player = userExists
             index = playersList.indexOfFirst { it.name == player.name }
 
