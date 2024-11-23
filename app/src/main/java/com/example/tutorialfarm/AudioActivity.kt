@@ -10,7 +10,11 @@ import android.media.MediaPlayer
 import android.os.Build
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
+import android.widget.TextView
 import androidx.annotation.RequiresApi
+import androidx.lifecycle.lifecycleScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 class AudioActivity : AppCompatActivity() {
 
@@ -21,7 +25,9 @@ class AudioActivity : AppCompatActivity() {
 
     @SuppressLint("MissingInflatedId")
     @RequiresApi(Build.VERSION_CODES.P)
+
     private lateinit var audio: MediaPlayer
+
     @RequiresApi(Build.VERSION_CODES.P)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,6 +37,7 @@ class AudioActivity : AppCompatActivity() {
         val imageHector = findViewById(R.id.imageHector) as ImageView
         val btonSkip = findViewById(R.id.buttonSkip) as ImageView
         val clickSound = MediaPlayer.create(this, R.raw.menu_sound)
+        val textView = findViewById(R.id.talkHector) as TextView
 
         val intent = intent
         val playersList : MutableList<Player> = intent.getParcelableArrayListExtra(EasyActivity.constantsProject.playersList)!!
@@ -41,6 +48,10 @@ class AudioActivity : AppCompatActivity() {
 
          audio = MediaPlayer.create(this, R.raw.audio_hector)
          audio.start()
+
+        lifecycleScope.launch {
+            wordsAudio(textView)
+        }
 
         btonSkip.setOnClickListener(){
             clickSound.start()
@@ -59,5 +70,17 @@ class AudioActivity : AppCompatActivity() {
 
             overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
         }
+    }
+
+    suspend fun wordsAudio(textView : TextView)
+    {
+        textView.text = "¡Hola, muy buenas, amigos! Soy el granjero Héctor. "
+        delay(5000)
+        textView.text = "¡Y tengo un problema! Solo tú me puedes ayudar a solucionarlo."
+        delay(5000)
+        textView.text = "¿Podrías ayudarme? He perdido varios animales de mi granja y no sé por dónde están."
+        delay(6000)
+        textView.text = "¡Solo tú puedes encontrarlos! ¡Mucha suerte!"
+
     }
 }

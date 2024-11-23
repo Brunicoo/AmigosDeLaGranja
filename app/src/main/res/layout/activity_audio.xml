@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -11,15 +10,33 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="150dp"
-        android:layout_marginLeft="500dp"
+        android:layout_marginLeft="300dp"
         android:background="@drawable/granjero" />
+
+    <TextView
+        android:id="@+id/talkHector"
+        android:layout_width="495dp"
+        android:layout_height="411dp"
+        android:layout_marginLeft="550dp"
+        android:background="@drawable/talk_image"
+        android:fontFamily="sans-serif-medium"
+        android:gravity="center"
+        android:shadowColor="#000000"
+        android:shadowDx="2"
+        android:shadowDy="2"
+        android:shadowRadius="4"
+        android:text="Solo tu puedes encontrarlos! Mucha suerte!"
+        android:padding="86dp"
+        android:textAlignment="center"
+        android:textColor="@android:color/black"
+        android:textSize="25sp" />
 
     <ImageView
         android:id="@+id/buttonSkip"
         android:layout_width="200dp"
         android:layout_height="200dp"
         android:layout_marginTop="550dp"
-        android:layout_marginLeft="200dp"
+        android:layout_marginLeft="900dp"
         android:background="@drawable/button_skip"
-        android:backgroundTint="@null"/>
-</LinearLayout>
+        android:backgroundTint="@null" />
+</RelativeLayout>
