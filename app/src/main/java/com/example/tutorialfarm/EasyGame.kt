@@ -2,6 +2,7 @@ package com.example.tutorialfarm
 
 import android.app.job.JobInfo.TriggerContentUri
 import android.content.res.Resources
+import android.icu.text.SimpleDateFormat
 import android.media.MediaPlayer
 import android.os.Build
 import android.os.Bundle
@@ -29,27 +30,39 @@ import com.example.tutorialfarm.TutorialEasyActivity
 import kotlinx.coroutines.*
 import kotlinx.coroutines.launch
 import java.time.LocalDateTime
+import java.time.ZoneId
 import java.time.format.DateTimeFormatter
+import java.util.Date
 import kotlin.random.Random
 
 class EasyGame : AppCompatActivity() {
 
-   /* object constantsProject {
-        const val playersList = "PLAYERLIST"
-        const val index = "INDEX"
-    }*/
     private var  seconds = 0
     private var timeRunnable: Runnable? = null
     private var handler = Handler(Looper.getMainLooper())
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
-
         val intent = intent
         val playersList : MutableList<Player> = intent.getParcelableArrayListExtra(TutorialEasyActivity.constantsProject.playersList)!!
         val index = intent.getIntExtra(TutorialEasyActivity.constantsProject.index, -1)
-
         super.onCreate(savedInstanceState)
-        val date = LocalDateTime.now()
+        val mediaBandasonora = MediaPlayer.create(this@EasyGame, R.raw.bandasonora)
+        mediaBandasonora.isLooping = true  // Reproducir música en bucle
+        mediaBandasonora.start()
+        mediaBandasonora.setVolume(
+            0.3f,
+            0.3f
+        )
+        val localDateTime = LocalDateTime.now()
+
+        // Convertir LocalDateTime a Date
+        val date = Date.from(localDateTime.atZone(ZoneId.systemDefault()).toInstant())
+
+        // Crear un formato específico
+        val dateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
+
+        // Formatear el Date a un String
+        val dateString = dateFormat.format(date)
         enableEdgeToEdge()
         var errors = 0
         var handler = Handler(Looper.getMainLooper())
@@ -75,7 +88,7 @@ class EasyGame : AppCompatActivity() {
             val imageView = view as ImageView
             if(imageView.drawable.constantState == searchImage.drawable.constantState){
                 val mediaAnimal = siquenceAnimals[0].sound?.let { MediaPlayer.create(this, it) }
-                mediaAnimal?.setVolume(0.2f,0.2f)
+                mediaAnimal?.setVolume(0.3f,0.3f)
                 mediaAnimal?.start()
                 siquenceAnimals.removeAt(0)
                 points ++
@@ -86,8 +99,10 @@ class EasyGame : AppCompatActivity() {
                     searchImage.setImageResource(siquenceAnimals[0].imageResId)
                 }else{
                     stopTimer()
+
                     val timeString = findViewById<TextView>(R.id.tiempo)
                     val seconds = stringToSeconds(timeString.text.toString())
+                    playersList[index].addTry(Try(seconds,errors,"Easy",dateString))
                     val background = findViewById<View>(R.id.finishBackground)
                     val frame = findViewById<ImageView>(R.id.finalFrame)
                     val image = findViewById<ImageView>(R.id.imageCongratulation)
@@ -98,7 +113,7 @@ class EasyGame : AppCompatActivity() {
                     errorsRecord.text = errors.toString()
                     val errorImg = findViewById<ImageView>(R.id.error_final)
                     val buttonReplay = findViewById<Button>(R.id.button_repetir_final)
-                    val buttonSalir = findViewById<Button>(R.id.button_salir_final)
+                    val buttonExit = findViewById<Button>(R.id.button_salir_final)
                     background.visibility = View.VISIBLE
                     frame.visibility = View.VISIBLE
                     image.visibility = View.VISIBLE
@@ -107,13 +122,21 @@ class EasyGame : AppCompatActivity() {
                     errorsRecord.visibility = View.VISIBLE
                     errorImg.visibility = View.VISIBLE
                     buttonReplay.visibility = View.VISIBLE
-                    buttonSalir.visibility = View.VISIBLE
+                    buttonExit.visibility = View.VISIBLE
+                    buttonReplay.setOnClickListener(){
+                        Tools.createActivity(this, EasyActivity::class.java, index, playersList)
+                        finish()
+                    }
+                    buttonExit.setOnClickListener(){
+                        Tools.createActivity(this, EasyActivity::class.java, index, playersList)
+                        finish()
+                    }
 
                 }
             }else{
                 errors ++
                 var mediaError = MediaPlayer.create(this,R.raw.error)
-                mediaError.setVolume(0.2f,0.2f)
+                mediaError.setVolume(0.3f,0.3f)
                 mediaError.start()
             }
         }
