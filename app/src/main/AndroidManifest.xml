@@ -39,5 +39,10 @@
                     android:name=".AudioActivity"
                     android:exported="true">
                 </activity>
+
+                <activity
+                    android:name=".EasyGame"
+                    android:exported="true">
+                </activity>
             </application>
         </manifest>

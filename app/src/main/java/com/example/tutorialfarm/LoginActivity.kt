@@ -68,8 +68,10 @@ class LoginActivity : AppCompatActivity() {
                     if (difficulty == false) {
                         Tools.createActivity(this, EasyActivity::class.java, index, playersList)
                         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+                        finish()
                     } else {
                         Tools.createActivity(this, HardActivity::class.java, index, playersList)
+                        finish()
                     }
 
                     loginSound.setOnCompletionListener {

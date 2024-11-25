@@ -1,5 +1,6 @@
 package com.example.tutorialfarm
 
+import android.annotation.SuppressLint
 import android.media.MediaPlayer
 import android.os.Build
 import android.os.Bundle
@@ -7,6 +8,7 @@ import android.util.Log
 import android.view.View
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
+import android.widget.Button
 import android.widget.ImageView
 import androidx.activity.enableEdgeToEdge
 import androidx.annotation.RequiresApi
@@ -25,6 +27,7 @@ class TutorialEasyActivity : AppCompatActivity() {
         const val index = "INDEX"
     }
 
+    @SuppressLint("MissingInflatedId")
     @RequiresApi(Build.VERSION_CODES.P)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,7 +49,9 @@ class TutorialEasyActivity : AppCompatActivity() {
             showAnimals(
                 animalImageView,
                 animalSound,
-                handImageView
+                handImageView,
+                index,
+                playersList
             )
         }
     }
@@ -55,7 +60,9 @@ class TutorialEasyActivity : AppCompatActivity() {
     private suspend fun showAnimals(
         animalImageView: ImageView,
         animalSound : MediaPlayer,
-        handImageView: ImageView
+        handImageView: ImageView,
+        index : Int,
+        playersList : MutableList<Player>
     ) {
 
         waitForClick(animalImageView)
@@ -63,9 +70,9 @@ class TutorialEasyActivity : AppCompatActivity() {
 
         animalSound.start()
 
-
         animalSound.setOnCompletionListener {
             it.release()
+            Tools.createActivity(this, EasyGame::class.java, index, playersList)
             finish()
         }
     }
@@ -75,7 +82,6 @@ class TutorialEasyActivity : AppCompatActivity() {
         suspendCancellableCoroutine { continuation ->
             imageView.setOnClickListener {
                 continuation.resume(Unit)
-
             }
         }
     }

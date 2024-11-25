@@ -57,9 +57,10 @@ class AudioActivity : AppCompatActivity() {
             clickSound.start()
             audio.stop()
             audio.release()
-            Tools.createActivity(this, TutorialEasyActivity::class.java, index, playersList)
 
+            Tools.createActivity(this, TutorialEasyActivity::class.java, index, playersList)
             overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+            finish()
         }
 
         audio.setOnCompletionListener {
@@ -67,8 +68,8 @@ class AudioActivity : AppCompatActivity() {
             it.release()
 
             Tools.createActivity(this, TutorialEasyActivity::class.java, index, playersList)
-
             overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+            finish()
         }
     }
 
@@ -81,6 +82,5 @@ class AudioActivity : AppCompatActivity() {
         textView.text = "¿Podrías ayudarme? He perdido varios animales de mi granja y no sé por dónde están."
         delay(6000)
         textView.text = "¡Solo tú puedes encontrarlos! ¡Mucha suerte!"
-
     }
 }
