@@ -1,4 +1,4 @@
-package com.example.tutorialfarm
+package com.example.amigosDeLaGranja
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4

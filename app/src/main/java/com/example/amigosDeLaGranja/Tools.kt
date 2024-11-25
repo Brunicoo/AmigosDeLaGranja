@@ -1,4 +1,4 @@
-package com.example.tutorialfarm
+package com.example.amigosDeLaGranja
 
 import android.content.Context
 import android.content.Intent

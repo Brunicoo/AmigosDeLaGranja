@@ -1,4 +1,4 @@
-package com.example.tutorialfarm
+package com.example.amigosDeLaGranja
 
 import android.media.MediaPlayer
 import android.os.Bundle
@@ -9,6 +9,8 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import com.example.tutorialfarm.R
+
 
 class LoginActivity : AppCompatActivity() {
 

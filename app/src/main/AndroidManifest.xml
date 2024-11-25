@@ -13,7 +13,7 @@
         android:theme="@style/Theme.TutorialFarm"
         tools:targetApi="31">
         <activity
-            android:name=".LoginActivity"
+            android:name="com.example.amigosDeLaGranja.LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -21,27 +21,37 @@
             </intent-filter>
         </activity>
                 <activity
-                    android:name=".TutorialEasyActivity"
+                    android:name="com.example.amigosDeLaGranja.TutorialEasyActivity"
                     android:exported="true">
                 </activity>
 
                 <activity
-                    android:name=".EasyActivity"
+                    android:name="com.example.amigosDeLaGranja.EasyActivity"
                     android:exported="true">
                 </activity>
 
                 <activity
-                    android:name=".HardActivity"
+                    android:name="com.example.amigosDeLaGranja.HardActivity"
                     android:exported="true">
                 </activity>
 
                 <activity
-                    android:name=".AudioActivity"
+                    android:name="com.example.amigosDeLaGranja.AudioActivity"
                     android:exported="true">
                 </activity>
 
                 <activity
-                    android:name=".EasyGame"
+                    android:name="com.example.amigosDeLaGranja.EasyGame"
+                    android:exported="true">
+                </activity>
+
+                <activity
+                    android:name="com.example.amigosDeLaGranja.HardGame"
+                    android:exported="true">
+                </activity>
+
+                <activity
+                    android:name="com.example.amigosDeLaGranja.TutorialHardActivity"
                     android:exported="true">
                 </activity>
             </application>

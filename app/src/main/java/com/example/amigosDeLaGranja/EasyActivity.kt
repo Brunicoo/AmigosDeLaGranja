@@ -1,13 +1,13 @@
-package com.example.tutorialfarm
+package com.example.amigosDeLaGranja
 
 import android.annotation.SuppressLint
-import android.content.Intent
 import android.media.MediaPlayer
 import android.os.Bundle
-import android.util.Log
 import android.widget.Button
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import com.example.tutorialfarm.R
+
 
 class EasyActivity : AppCompatActivity() {
 

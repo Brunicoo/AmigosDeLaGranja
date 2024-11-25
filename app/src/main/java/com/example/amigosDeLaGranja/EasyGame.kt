@@ -1,6 +1,5 @@
-package com.example.tutorialfarm
+package com.example.amigosDeLaGranja
 
-import android.app.job.JobInfo.TriggerContentUri
 import android.content.res.Resources
 import android.media.MediaPlayer
 import android.os.Build
@@ -21,15 +20,10 @@ import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.example.mecanicadearrastre.AnimalsEasy
-import com.example.tutorialfarm.EasyActivity
-import com.example.tutorialfarm.LoginActivity
-import com.example.tutorialfarm.Player
 import com.example.tutorialfarm.R
-import com.example.tutorialfarm.TutorialEasyActivity
 import kotlinx.coroutines.*
 import kotlinx.coroutines.launch
 import java.time.LocalDateTime
-import java.time.format.DateTimeFormatter
 import kotlin.random.Random
 
 class EasyGame : AppCompatActivity() {

@@ -1,9 +1,9 @@
-package com.example.tutorialfarm
+package com.example.amigosDeLaGranja
 
 import android.os.Parcel
 import android.os.Parcelable
 
-class Try(val time: Int, val errors: Int, val game: String, val date: String) : Parcelable {
+class Try(val time: Int, val errors: Int, val difficulty: String, val date: String) : Parcelable {
 
     constructor(parcel: Parcel) : this(
         parcel.readInt(),
@@ -16,7 +16,7 @@ class Try(val time: Int, val errors: Int, val game: String, val date: String) : 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeInt(time)
         parcel.writeInt(errors)
-        parcel.writeString(game)
+        parcel.writeString(difficulty)
         parcel.writeString(date)
     }
 

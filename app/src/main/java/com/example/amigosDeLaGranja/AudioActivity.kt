@@ -1,7 +1,6 @@
-package com.example.tutorialfarm
+package com.example.amigosDeLaGranja
 
 import android.annotation.SuppressLint
-import android.content.Intent
 import android.os.Bundle
 import android.widget.ImageView
 import androidx.activity.enableEdgeToEdge
@@ -15,6 +14,8 @@ import androidx.annotation.RequiresApi
 import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import com.example.tutorialfarm.R
+
 
 class AudioActivity : AppCompatActivity() {
 
