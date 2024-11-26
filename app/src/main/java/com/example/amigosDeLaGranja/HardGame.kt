@@ -328,8 +328,8 @@ class HardGame : AppCompatActivity() {
         val errorPlayer = MediaPlayer.create(this@HardGame, R.raw.error)
         errorPlayer.start()
         errorPlayer.setVolume(
-            0.2f,
-            0.2f
+            1f,
+            1f
         ) // 0.3f es el volumen (en este caso 30% de su volumen máximo)
         errorPlayer.setOnCompletionListener() {
             errorPlayer.stop()
@@ -346,7 +346,7 @@ class HardGame : AppCompatActivity() {
         view2.getLocationOnScreen(location2)
         var reaction = 0
         if (view1.width == 80) {
-            reaction = 50
+            reaction = 80
         } else if (view1.width == 110) {
             reaction = 90
         } else {
@@ -541,13 +541,15 @@ class HardGame : AppCompatActivity() {
         animalsAdded3 = false
         reiniciarJuego.setOnClickListener {
             Tools.createActivity(this, HardGame::class.java, index, playersList)
-            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+            mediaPlayer2.stop()
+            overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
             finish()
         }
 
         btonExit.setOnClickListener()
         {
             Tools.createActivitySimple(this, LoginActivity::class.java)
+            mediaPlayer2.stop()
             overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
             finish()
         }

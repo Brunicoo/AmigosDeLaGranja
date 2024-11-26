@@ -123,14 +123,15 @@ class EasyGame : AppCompatActivity() {
 
                     buttonReplay.setOnClickListener(){
                         Tools.createActivity(this, TutorialHardActivity::class.java, index, playersList)
-                        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+                        mediaBandasonora.stop()
+                        overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
                         finish()
                     }
 
                     buttonExit.setOnClickListener(){
                         Tools.createActivitySimple(this, LoginActivity::class.java)
-                        overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
                         mediaBandasonora.stop()
+                        overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
                         finish()
 
                     }
