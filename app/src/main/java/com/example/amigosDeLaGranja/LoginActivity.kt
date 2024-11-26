@@ -48,7 +48,7 @@ class LoginActivity : AppCompatActivity() {
         {
             difficulty = true
             btonHard.setBackgroundResource(R.drawable.button_selected_hard)
-            btonEasy.setBackgroundColor(R.drawable.rectangle_borders)
+            btonEasy.setBackgroundResource(R.drawable.rectangle_borders)
         }
 
 

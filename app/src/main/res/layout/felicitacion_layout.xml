@@ -5,7 +5,7 @@
     android:layout_height="550dp"
     android:layout_gravity="center"
     android:layout_marginBottom="80dp"
-    android:background="@drawable/animal_frame_design"
+    android:background="@drawable/animal_frame_design_hard"
     android:visibility="gone"
     >
 

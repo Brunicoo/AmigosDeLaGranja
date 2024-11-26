@@ -126,7 +126,7 @@
         android:layout_height="150dp"
         android:layout_margin="30dp"
         app:backgroundTint="@null"
-        android:background="@drawable/animal_frame_design"
+        android:background="@drawable/animal_frame_design_easy"
         >
     </ImageView>
     <ImageView
@@ -140,7 +140,7 @@
     <ImageView
         android:layout_width="500dp"
         android:layout_height="120dp"
-        android:background="@drawable/animal_frame_design"
+        android:background="@drawable/animal_frame_design_easy"
         android:layout_marginTop="30dp"
         android:layout_marginLeft="730dp"
         >

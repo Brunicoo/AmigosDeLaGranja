@@ -8,7 +8,7 @@
         android:layout_width="150dp"
         android:layout_height="700dp"
         android:layout_marginTop="10dp"
-        android:background="@drawable/animal_frame_design"
+        android:background="@drawable/animal_frame_design_hard"
         app:backgroundTint="@null" />
 
 
@@ -59,7 +59,7 @@
         android:layout_height="700dp"
         android:layout_marginTop="10dp"
         android:layout_gravity="end"
-        android:background="@drawable/animal_frame_design"
+        android:background="@drawable/animal_frame_design_hard"
         app:backgroundTint="@null" />
 
     <!-- Líneas divisorias del lado derecho ajustadas a la altura del ImageView -->

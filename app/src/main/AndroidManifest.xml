@@ -20,6 +20,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
                 <activity
                     android:name="com.example.amigosDeLaGranja.TutorialEasyActivity"
                     android:exported="true">
@@ -54,5 +55,6 @@
                     android:name="com.example.amigosDeLaGranja.TutorialHardActivity"
                     android:exported="true">
                 </activity>
+
             </application>
         </manifest>

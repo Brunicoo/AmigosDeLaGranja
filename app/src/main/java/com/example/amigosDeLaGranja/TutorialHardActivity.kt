@@ -32,7 +32,7 @@ class TutorialHardActivity : AppCompatActivity() {
 
         videoView.setOnCompletionListener {
             Tools.createActivity(this, HardGame::class.java, index, playersList)
-            //finish()
+            finish()
             overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
         }
     }

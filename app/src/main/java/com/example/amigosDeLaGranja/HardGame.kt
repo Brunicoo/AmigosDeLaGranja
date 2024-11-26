@@ -70,7 +70,7 @@ class HardGame : AppCompatActivity() {
     @SuppressLint("MissingInflatedId", "ClickableViewAccessibility", "SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_hard)
+        setContentView(R.layout.activit_hard_game)
         startTimer()
 
         val intent = intent
