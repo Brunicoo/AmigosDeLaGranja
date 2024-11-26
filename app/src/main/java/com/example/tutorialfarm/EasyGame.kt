@@ -169,14 +169,14 @@ class EasyGame : AppCompatActivity() {
     }
 
     private fun generateSequenceAnimals(): MutableList<AnimalsEasy> {
-        return listOf(AnimalsEasy(R.drawable.vaca,R.raw.vaca_sonido,200,150),
-            AnimalsEasy(R.drawable.pato,R.raw.pato_sonido,100,100),
-            AnimalsEasy(R.drawable.perro,R.raw.perro_sonido,150,100),
-            AnimalsEasy(R.drawable.caballo,R.raw.caballo_sonido,200,300),
-            AnimalsEasy(R.drawable.oveja,R.raw.oveja,150,150),
-            AnimalsEasy(R.drawable.cerdo,R.raw.cerdo_sonido,200,150),
-            AnimalsEasy(R.drawable.conejo,R.raw.conejo,100,100),
-            AnimalsEasy(R.drawable.gallina,R.raw.gallina_sonido,100,100)).shuffled().toMutableList()
+        return listOf(AnimalsEasy(R.drawable.vaca,R.raw.vaca_sonido,200,300),
+            AnimalsEasy(R.drawable.pato,R.raw.pato_sonido,150,150),
+            AnimalsEasy(R.drawable.perro,R.raw.perro_sonido,200,150),
+            AnimalsEasy(R.drawable.caballo,R.raw.caballo_sonido,250,350),
+            AnimalsEasy(R.drawable.oveja,R.raw.oveja,250,250),
+            AnimalsEasy(R.drawable.cerdo,R.raw.cerdo_sonido,300,250),
+            AnimalsEasy(R.drawable.conejo,R.raw.conejo,150,150),
+            AnimalsEasy(R.drawable.gallina,R.raw.gallina_sonido,150,150)).shuffled().toMutableList()
 
     }
 
@@ -225,7 +225,7 @@ class EasyGame : AppCompatActivity() {
 
             (listaAnimales[index][0].layoutParams as FrameLayout.LayoutParams).leftMargin = positionX
             (listaAnimales[index][0].layoutParams as FrameLayout.LayoutParams).topMargin = positionY
-            (listaAnimales[index][1].layoutParams as FrameLayout.LayoutParams).leftMargin = positionX+21750
+            (listaAnimales[index][1].layoutParams as FrameLayout.LayoutParams).leftMargin = positionX+23100
             (listaAnimales[index][1].layoutParams as FrameLayout.LayoutParams).topMargin = positionY
         }
     }
