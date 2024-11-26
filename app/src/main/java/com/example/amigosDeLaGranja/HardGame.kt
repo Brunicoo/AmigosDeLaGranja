@@ -29,6 +29,8 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.time.LocalDateTime
+import java.time.ZoneId
+import java.time.format.DateTimeFormatter
 import java.util.Date
 import kotlin.random.Random
 
@@ -265,7 +267,7 @@ class HardGame : AppCompatActivity() {
                         animalsAdded3 = true
                         stopTimer()
                         eliminateCompleteAnimals(animalesAnadir)
-                        //createTry()
+                        createTry(playersList, index)
                         makeFinalVisible(animales, index, playersList)
 
                     }
@@ -511,11 +513,14 @@ class HardGame : AppCompatActivity() {
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
-    private fun createTry() {
-        val date = LocalDateTime.now()
-        val dateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
-        val dateString = dateFormat.format(date)
-        var tryDef = Try(timeRunnable.toString().toInt(), counterErrors, "Hard", dateString)
+    private fun createTry(playersList: MutableList<Player>, index: Int) {
+        val date = LocalDateTime.now(ZoneId.systemDefault())
+        val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")
+        val dateString = date.format(formatter)
+        val seconds = ((System.currentTimeMillis() - startTime) / 1000).toInt()
+
+        val newTry = Try(seconds, counterErrors, "DIFÍCIL", dateString)
+        playersList[index].addTry(newTry)
     }
 
     @RequiresApi(Build.VERSION_CODES.O)

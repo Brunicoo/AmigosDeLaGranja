@@ -99,7 +99,7 @@ class EasyGame : AppCompatActivity() {
 
                     val timeString = findViewById<TextView>(R.id.tiempo)
                     val seconds = stringToSeconds(timeString.text.toString())
-                    playersList[index].addTry(Try(seconds,errors,"Easy",dateString))
+                    playersList[index].addTry(Try(seconds,errors,"FÁCIL",dateString))
                     val background = findViewById<View>(R.id.finishBackground)
                     val frame = findViewById<ImageView>(R.id.finalFrame)
                     val image = findViewById<ImageView>(R.id.imageCongratulation)
