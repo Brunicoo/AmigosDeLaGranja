@@ -34,13 +34,16 @@ class EasyGame : AppCompatActivity() {
     private var  seconds = 0
     private var timeRunnable: Runnable? = null
     private var handler = Handler(Looper.getMainLooper())
+    private lateinit var mediaBandasonora : MediaPlayer
+
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         val intent = intent
         val playersList : MutableList<Player> = intent.getParcelableArrayListExtra(TutorialEasyActivity.constantsProject.playersList)!!
         val index = intent.getIntExtra(TutorialEasyActivity.constantsProject.index, -1)
         super.onCreate(savedInstanceState)
-        val mediaBandasonora = MediaPlayer.create(this@EasyGame, R.raw.bandasonora)
+
+        mediaBandasonora = MediaPlayer.create(this@EasyGame, R.raw.bandasonora)
         mediaBandasonora.isLooping = true  // Reproducir música en bucle
         mediaBandasonora.start()
         mediaBandasonora.setVolume(
@@ -127,6 +130,7 @@ class EasyGame : AppCompatActivity() {
                     buttonExit.setOnClickListener(){
                         Tools.createActivitySimple(this, LoginActivity::class.java)
                         overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
+                        mediaBandasonora.stop()
                         finish()
 
                     }

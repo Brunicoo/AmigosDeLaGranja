@@ -552,6 +552,4 @@ class HardGame : AppCompatActivity() {
             finish()
         }
     }
-
-
 }
