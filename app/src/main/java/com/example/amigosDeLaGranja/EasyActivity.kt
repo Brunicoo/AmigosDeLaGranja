@@ -31,7 +31,7 @@ class EasyActivity : AppCompatActivity() {
         btonEasy.setOnClickListener()
         {
             loginSound.start()
-            Tools.createActivity(this, AudioActivity::class.java, index, playersList)
+            Tools.createActivity(this, AudioActivity_Easy::class.java, index, playersList)
             overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
             finish()
         loginSound.setOnCompletionListener {

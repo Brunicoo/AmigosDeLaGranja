@@ -11,5 +11,10 @@ class Tools {
             intent.putExtra(LoginActivity.constantsProject.index, index)
             context.startActivity(intent)
         }
+
+        fun createActivitySimple(context: Context, activityClass: Class<*>) {
+            val intent = Intent(context, activityClass)
+            context.startActivity(intent)
+        }
     }
 }

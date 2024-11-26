@@ -13,6 +13,7 @@ import android.util.Log
 import android.view.Display
 import android.view.MotionEvent
 import android.view.View
+import android.widget.Button
 import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.TextView
@@ -181,7 +182,7 @@ class HardGame : AppCompatActivity() {
         animales.forEach { animal ->
             animal.imageView.setImageResource(animal.imageResId) // Asignar la imagen del animal al ImageView
             if (!animal.isSilueta) {
-                setTouchListener(animal, animales, animalesSilueta)
+                setTouchListener(animal, animales, animalesSilueta, index, playersList)
             }
         }
     }
@@ -198,7 +199,9 @@ class HardGame : AppCompatActivity() {
     private fun setTouchListener(
         animal: AnimalHard,
         animales: List<AnimalHard>,
-        animalesAnadir: MutableList<AnimalHard>
+        animalesAnadir: MutableList<AnimalHard>,
+        index : Int,
+        playersList : MutableList<Player>
     ) {
 
         animal.imageView.setOnTouchListener { view, event ->
@@ -262,8 +265,8 @@ class HardGame : AppCompatActivity() {
                         animalsAdded3 = true
                         stopTimer()
                         eliminateCompleteAnimals(animalesAnadir)
-                        createTry()
-                        makeFinalVisible(animales)
+                        //createTry()
+                        makeFinalVisible(animales, index, playersList)
 
                     }
 
@@ -516,7 +519,7 @@ class HardGame : AppCompatActivity() {
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
-    private fun makeFinalVisible(animales: List<AnimalHard>) {
+    private fun makeFinalVisible(animales: List<AnimalHard>, index : Int, playersList: MutableList<Player>) {
         CoroutineScope(Dispatchers.Main).launch {
             delay(300)
         }
@@ -525,6 +528,7 @@ class HardGame : AppCompatActivity() {
         val textoTiempo = findViewById(R.id.finalTimeTextView) as TextView
         val textoErrores = findViewById(R.id.finalErrorCounter) as TextView
         val reiniciarJuego = findViewById(R.id.botonReplay) as ImageView
+        val btonExit = findViewById(R.id.btonExit) as ImageView
         textoTiempo.text = timeString
         textoErrores.text = counterErrors.toString()
         oscurecerFinal.visibility = View.VISIBLE
@@ -536,45 +540,16 @@ class HardGame : AppCompatActivity() {
         animalsAdded2 = false
         animalsAdded3 = false
         reiniciarJuego.setOnClickListener {
-            // Reiniciar el contador de errores en la UI
-            val errorView = findViewById<TextView>(R.id.errorsTextView)
-            errorView.text = counterErrors.toString()
+            Tools.createActivity(this, HardGame::class.java, index, playersList)
+            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+            finish()
+        }
 
-            // Reiniciar el temporizador
-            startTime = System.currentTimeMillis() // Resetear el tiempo de inicio
-            startTimer() // Reiniciar el timer
-
-            // Reiniciar los animales en sus posiciones iniciales
-            val guardarPosiciones: MutableList<IntArray> = mutableListOf()
-
-
-            // Eliminar todos los animales y resetear sus posiciones
-
-            // Reiniciar cualquier otro estado relevante
-            val newImageError = findViewById<ImageView>(R.id.errorImage)
-            newImageError.visibility = View.GONE
-
-            // Reiniciar el fondo
-            val backgroundView = findViewById<FrameLayout>(R.id.background)
-            backgroundView.setBackgroundResource(R.drawable.granjafondo)
-            var animalesSilueta: MutableList<AnimalHard> =
-                mutableListOf(burroSilueta, cerdoSilueta, ovejaSilueta)
-
-            setupInitialPositions(animalesSilueta, guardarPosiciones)
-
-            // Asignar el listener de toque a cada ImageView de los animales
-            animales.forEach { animal ->
-                if (!animal.isSilueta) {
-                    animal.imageView.x = animal.position!!.first
-                    animal.imageView.y = animal.position!!.second
-                    animal.imageView.visibility = View.VISIBLE
-                    animal.isCorrect = false // Reinicia el estado
-                    setTouchListener(animal, animales, animalesSilueta)
-                    animal.imageView.invalidate() // Fuerza la actualización
-                }
-            }
-            oscurecerFinal.visibility = View.GONE
-            mostrarFinal.visibility = View.GONE
+        btonExit.setOnClickListener()
+        {
+            Tools.createActivitySimple(this, LoginActivity::class.java)
+            overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
+            finish()
         }
     }
 

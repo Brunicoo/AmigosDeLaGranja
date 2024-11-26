@@ -1,6 +1,7 @@
 package com.example.amigosDeLaGranja
 
 import android.content.res.Resources
+import android.icu.text.SimpleDateFormat
 import android.media.MediaPlayer
 import android.os.Build
 import android.os.Bundle
@@ -24,21 +25,38 @@ import com.example.tutorialfarm.R
 import kotlinx.coroutines.*
 import kotlinx.coroutines.launch
 import java.time.LocalDateTime
+import java.time.ZoneId
+import java.util.Date
 import kotlin.random.Random
 
 class EasyGame : AppCompatActivity() {
+
     private var  seconds = 0
     private var timeRunnable: Runnable? = null
     private var handler = Handler(Looper.getMainLooper())
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
-
         val intent = intent
         val playersList : MutableList<Player> = intent.getParcelableArrayListExtra(TutorialEasyActivity.constantsProject.playersList)!!
         val index = intent.getIntExtra(TutorialEasyActivity.constantsProject.index, -1)
-
         super.onCreate(savedInstanceState)
-        val date = LocalDateTime.now()
+        val mediaBandasonora = MediaPlayer.create(this@EasyGame, R.raw.bandasonora)
+        mediaBandasonora.isLooping = true  // Reproducir música en bucle
+        mediaBandasonora.start()
+        mediaBandasonora.setVolume(
+            0.3f,
+            0.3f
+        )
+        val localDateTime = LocalDateTime.now()
+
+        // Convertir LocalDateTime a Date
+        val date = Date.from(localDateTime.atZone(ZoneId.systemDefault()).toInstant())
+
+        // Crear un formato específico
+        val dateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
+
+        // Formatear el Date a un String
+        val dateString = dateFormat.format(date)
         enableEdgeToEdge()
         var errors = 0
         var handler = Handler(Looper.getMainLooper())
@@ -64,7 +82,7 @@ class EasyGame : AppCompatActivity() {
             val imageView = view as ImageView
             if(imageView.drawable.constantState == searchImage.drawable.constantState){
                 val mediaAnimal = siquenceAnimals[0].sound?.let { MediaPlayer.create(this, it) }
-                mediaAnimal?.setVolume(0.2f,0.2f)
+                mediaAnimal?.setVolume(0.3f,0.3f)
                 mediaAnimal?.start()
                 siquenceAnimals.removeAt(0)
                 points ++
@@ -75,8 +93,10 @@ class EasyGame : AppCompatActivity() {
                     searchImage.setImageResource(siquenceAnimals[0].imageResId)
                 }else{
                     stopTimer()
+
                     val timeString = findViewById<TextView>(R.id.tiempo)
                     val seconds = stringToSeconds(timeString.text.toString())
+                    playersList[index].addTry(Try(seconds,errors,"Easy",dateString))
                     val background = findViewById<View>(R.id.finishBackground)
                     val frame = findViewById<ImageView>(R.id.finalFrame)
                     val image = findViewById<ImageView>(R.id.imageCongratulation)
@@ -87,7 +107,7 @@ class EasyGame : AppCompatActivity() {
                     errorsRecord.text = errors.toString()
                     val errorImg = findViewById<ImageView>(R.id.error_final)
                     val buttonReplay = findViewById<Button>(R.id.button_repetir_final)
-                    val buttonSalir = findViewById<Button>(R.id.button_salir_final)
+                    val buttonExit = findViewById<Button>(R.id.button_salir_final)
                     background.visibility = View.VISIBLE
                     frame.visibility = View.VISIBLE
                     image.visibility = View.VISIBLE
@@ -96,13 +116,26 @@ class EasyGame : AppCompatActivity() {
                     errorsRecord.visibility = View.VISIBLE
                     errorImg.visibility = View.VISIBLE
                     buttonReplay.visibility = View.VISIBLE
-                    buttonSalir.visibility = View.VISIBLE
+                    buttonExit.visibility = View.VISIBLE
+
+                    buttonReplay.setOnClickListener(){
+                        Tools.createActivity(this, TutorialHardActivity::class.java, index, playersList)
+                        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+                        finish()
+                    }
+
+                    buttonExit.setOnClickListener(){
+                        Tools.createActivitySimple(this, LoginActivity::class.java)
+                        overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
+                        finish()
+
+                    }
 
                 }
             }else{
                 errors ++
                 var mediaError = MediaPlayer.create(this,R.raw.error)
-                mediaError.setVolume(0.2f,0.2f)
+                mediaError.setVolume(0.3f,0.3f)
                 mediaError.start()
             }
         }
@@ -135,14 +168,14 @@ class EasyGame : AppCompatActivity() {
     }
 
     private fun generateSequenceAnimals(): MutableList<AnimalsEasy> {
-        return listOf(AnimalsEasy(R.drawable.vaca,R.raw.vaca_sonido,200,150),
-            AnimalsEasy(R.drawable.pato,R.raw.pato_sonido,100,100),
-            AnimalsEasy(R.drawable.perro,R.raw.perro_sonido,150,100),
-            AnimalsEasy(R.drawable.caballo,R.raw.caballo_sonido,200,300),
-            AnimalsEasy(R.drawable.oveja,R.raw.oveja,150,150),
-            AnimalsEasy(R.drawable.cerdo,R.raw.cerdo_sonido,200,150),
-            AnimalsEasy(R.drawable.conejo,R.raw.conejo,100,100),
-            AnimalsEasy(R.drawable.gallina,R.raw.gallina_sonido,100,100)).shuffled().toMutableList()
+        return listOf(AnimalsEasy(R.drawable.vaca,R.raw.vaca_sonido,200,300),
+            AnimalsEasy(R.drawable.pato,R.raw.pato_sonido,150,150),
+            AnimalsEasy(R.drawable.perro,R.raw.perro_sonido,200,150),
+            AnimalsEasy(R.drawable.caballo,R.raw.caballo_sonido,250,350),
+            AnimalsEasy(R.drawable.oveja,R.raw.oveja,200,200),
+            AnimalsEasy(R.drawable.cerdo,R.raw.cerdo_sonido,300,250),
+            AnimalsEasy(R.drawable.conejo,R.raw.conejo,150,150),
+            AnimalsEasy(R.drawable.gallina,R.raw.gallina_sonido,150,150)).shuffled().toMutableList()
 
     }
 
@@ -191,7 +224,7 @@ class EasyGame : AppCompatActivity() {
 
             (listaAnimales[index][0].layoutParams as FrameLayout.LayoutParams).leftMargin = positionX
             (listaAnimales[index][0].layoutParams as FrameLayout.LayoutParams).topMargin = positionY
-            (listaAnimales[index][1].layoutParams as FrameLayout.LayoutParams).leftMargin = positionX+21750
+            (listaAnimales[index][1].layoutParams as FrameLayout.LayoutParams).leftMargin = positionX+17340
             (listaAnimales[index][1].layoutParams as FrameLayout.LayoutParams).topMargin = positionY
         }
     }
@@ -248,4 +281,7 @@ class EasyGame : AppCompatActivity() {
     private fun stopTimer() {
         timeRunnable?.let { handler.removeCallbacks(it) }
     }
+
+
+
 }

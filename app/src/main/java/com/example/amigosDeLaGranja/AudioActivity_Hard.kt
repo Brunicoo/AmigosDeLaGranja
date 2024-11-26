@@ -17,7 +17,7 @@ import kotlinx.coroutines.launch
 import com.example.tutorialfarm.R
 
 
-class AudioActivity : AppCompatActivity() {
+class AudioActivity_Hard : AppCompatActivity() {
 
     object constantsProject {
         const val playersList = "PLAYERLIST"
@@ -47,8 +47,8 @@ class AudioActivity : AppCompatActivity() {
         val moveAnimation: Animation = AnimationUtils.loadAnimation(this, R.anim.move_up_down)
         imageHector.startAnimation(moveAnimation)
 
-         audio = MediaPlayer.create(this, R.raw.audio_hector)
-         audio.start()
+        audio = MediaPlayer.create(this, R.raw.audio_hector)
+        audio.start()
 
         lifecycleScope.launch {
             wordsAudio(textView)
@@ -59,7 +59,7 @@ class AudioActivity : AppCompatActivity() {
             audio.stop()
             audio.release()
 
-            Tools.createActivity(this, TutorialEasyActivity::class.java, index, playersList)
+            Tools.createActivity(this, TutorialHardActivity::class.java, index, playersList)
             overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
             finish()
         }
@@ -68,7 +68,7 @@ class AudioActivity : AppCompatActivity() {
             audio.stop()
             it.release()
 
-            Tools.createActivity(this, TutorialEasyActivity::class.java, index, playersList)
+            Tools.createActivity(this, TutorialHardActivity::class.java, index, playersList)
             overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
             finish()
         }

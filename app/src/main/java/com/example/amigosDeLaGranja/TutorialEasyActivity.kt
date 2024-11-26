@@ -37,8 +37,8 @@ class TutorialEasyActivity : AppCompatActivity() {
         val moveAnimation: Animation = AnimationUtils.loadAnimation(this, R.anim.scale_animation)
 
         val intent = intent
-        val playersList : MutableList<Player> = intent.getParcelableArrayListExtra(AudioActivity.constantsProject.playersList)!!
-        val index = intent.getIntExtra(AudioActivity.constantsProject.index, -1)
+        val playersList : MutableList<Player> = intent.getParcelableArrayListExtra(AudioActivity_Easy.constantsProject.playersList)!!
+        val index = intent.getIntExtra(AudioActivity_Easy.constantsProject.index, -1)
 
         handImageView.startAnimation(moveAnimation)
 
@@ -71,6 +71,7 @@ class TutorialEasyActivity : AppCompatActivity() {
             it.release()
             Tools.createActivity(this, EasyGame::class.java, index, playersList)
             finish()
+            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
         }
     }
 

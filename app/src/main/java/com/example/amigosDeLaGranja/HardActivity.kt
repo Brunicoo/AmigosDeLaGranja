@@ -27,7 +27,7 @@ class HardActivity : AppCompatActivity() {
         val playersList : MutableList<Player> = intent.getParcelableArrayListExtra(LoginActivity.constantsProject.playersList)!!
 
         btonHard.setOnClickListener(){
-            Tools.createActivity(this, TutorialHardActivity::class.java, index, playersList)
+            Tools.createActivity(this, AudioActivity_Hard::class.java, index, playersList)
             overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
             finish()
         }

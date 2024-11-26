@@ -1,8 +1,10 @@
 package com.example.amigosDeLaGranja
 
+import android.annotation.SuppressLint
 import android.net.Uri
 import android.os.Bundle
 import android.view.View
+import android.widget.LinearLayout
 import android.widget.VideoView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -13,6 +15,7 @@ class TutorialHardActivity : AppCompatActivity() {
         const val playersList = "PLAYERLIST"
         const val index = "INDEX"
     }
+    @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -24,7 +27,9 @@ class TutorialHardActivity : AppCompatActivity() {
         val intent = intent
         val index = intent.getIntExtra(HardActivity.constantsProject.index, -1)
         val playersList : MutableList<Player> = intent.getParcelableArrayListExtra(HardActivity.constantsProject.playersList)!!
+        val linearLTH = findViewById(R.id.linearLTutoH) as LinearLayout
 
+        linearLTH.visibility = View.VISIBLE
         videoView.visibility = View.VISIBLE
         videoView.setVideoURI(uri)
 
