@@ -98,8 +98,8 @@ class EasyGame : AppCompatActivity() {
                     stopTimer()
 
                     val timeString = findViewById<TextView>(R.id.tiempo)
-                    val seconds = stringToSeconds(timeString.text.toString())
-                    playersList[index].addTry(Try(seconds,errors,"FÁCIL",dateString))
+
+                    createTry(playersList, index, errors, dateString)
                     val background = findViewById<View>(R.id.finishBackground)
                     val frame = findViewById<ImageView>(R.id.finalFrame)
                     val image = findViewById<ImageView>(R.id.imageCongratulation)
@@ -122,7 +122,7 @@ class EasyGame : AppCompatActivity() {
                     buttonExit.visibility = View.VISIBLE
 
                     buttonReplay.setOnClickListener(){
-                        Tools.createActivity(this, TutorialHardActivity::class.java, index, playersList)
+                        Tools.createActivity(this, EasyGame::class.java, index, playersList)
                         mediaBandasonora.stop()
                         overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
                         finish()
@@ -287,6 +287,13 @@ class EasyGame : AppCompatActivity() {
         timeRunnable?.let { handler.removeCallbacks(it) }
     }
 
+    private fun createTry(playersList: MutableList<Player>, index: Int, errors : Int, dateString : String)
+    {
+        val timeString = findViewById<TextView>(R.id.tiempo)
+        val seconds = stringToSeconds(timeString.text.toString())
+        playersList[index].addTry(Try("FÁCIL",dateString,errors,seconds))
 
+        Tools.saveTryToJson(playersList,this)
+    }
 
 }

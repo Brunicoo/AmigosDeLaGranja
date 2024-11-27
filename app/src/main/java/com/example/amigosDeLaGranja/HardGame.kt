@@ -13,25 +13,20 @@ import android.util.Log
 import android.view.Display
 import android.view.MotionEvent
 import android.view.View
-import android.widget.Button
 import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
-import com.example.amigosDeLaGranja.AnimalHard
-import com.example.amigosDeLaGranja.Try
 import com.example.mecanicadearrastre.Animal
 import com.example.tutorialfarm.R
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import java.text.SimpleDateFormat
 import java.time.LocalDateTime
 import java.time.ZoneId
 import java.time.format.DateTimeFormatter
-import java.util.Date
 import kotlin.random.Random
 
 class HardGame : AppCompatActivity() {
@@ -58,7 +53,7 @@ class HardGame : AppCompatActivity() {
     var animalsAdded2 = false
     var animalsAdded3 = false
     var correctAnimal = false
-    var counterErrors = 0
+    var errores = 0
     var errorCounted = false
 
     private val posicionesIniciales: MutableList<Pair<Float, Float>> = mutableListOf()
@@ -315,9 +310,9 @@ class HardGame : AppCompatActivity() {
     }
 
     private fun errorCounter(x: Float, y: Float) {
-        counterErrors++
+        errores++
         var errorView = findViewById(R.id.errorsTextView) as TextView
-        errorView.text = counterErrors.toString()
+        errorView.text = errores.toString()
         errorCounted = true;
         var newImageError: ImageView = findViewById(R.id.errorImage)
         newImageError.x = x
@@ -348,9 +343,9 @@ class HardGame : AppCompatActivity() {
         view2.getLocationOnScreen(location2)
         var reaction = 0
         if (view1.width == 80) {
-            reaction = 80
-        } else if (view1.width == 110) {
             reaction = 90
+        } else if (view1.width == 110) {
+            reaction = 100
         } else {
             reaction = 125
         }
@@ -514,13 +509,15 @@ class HardGame : AppCompatActivity() {
 
     @RequiresApi(Build.VERSION_CODES.O)
     private fun createTry(playersList: MutableList<Player>, index: Int) {
-        val date = LocalDateTime.now(ZoneId.systemDefault())
+        val fecha = LocalDateTime.now(ZoneId.systemDefault())
         val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")
-        val dateString = date.format(formatter)
-        val seconds = ((System.currentTimeMillis() - startTime) / 1000).toInt()
+        val dateString = fecha.format(formatter)
+        val tiemposAnimales = ((System.currentTimeMillis() - startTime) / 1000).toInt()
 
-        val newTry = Try(seconds, counterErrors, "DIFÍCIL", dateString)
+        val newTry = Try("DIFÍCIL", dateString, errores, tiemposAnimales)
         playersList[index].addTry(newTry)
+
+        Tools.saveTryToJson(playersList,this)
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -535,11 +532,11 @@ class HardGame : AppCompatActivity() {
         val reiniciarJuego = findViewById(R.id.botonReplay) as ImageView
         val btonExit = findViewById(R.id.btonExit) as ImageView
         textoTiempo.text = timeString
-        textoErrores.text = counterErrors.toString()
+        textoErrores.text = errores.toString()
         oscurecerFinal.visibility = View.VISIBLE
         mostrarFinal.visibility = View.VISIBLE
         animalesEcnontrados = 0
-        counterErrors = 0
+        errores = 0
         errorCounted = false
         animalsAdded1 = false
         animalsAdded2 = false

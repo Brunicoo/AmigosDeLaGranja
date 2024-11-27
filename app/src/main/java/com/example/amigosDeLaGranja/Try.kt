@@ -3,21 +3,22 @@ package com.example.amigosDeLaGranja
 import android.os.Parcel
 import android.os.Parcelable
 
-class Try(val time: Int, val errors: Int, val difficulty: String, val date: String) : Parcelable {
+class Try(val modo: String, val fecha: String,val errores: Int, val tiemposAnimales: Int) : Parcelable {
 
     constructor(parcel: Parcel) : this(
-        parcel.readInt(),
-        parcel.readInt(),
         parcel.readString().toString(),
-        parcel.readString().toString()
+        parcel.readString().toString(),
+        parcel.readInt(),
+        parcel.readInt(),
+
     ) {
     }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
-        parcel.writeInt(time)
-        parcel.writeInt(errors)
-        parcel.writeString(difficulty)
-        parcel.writeString(date)
+        parcel.writeInt(tiemposAnimales)
+        parcel.writeInt(errores)
+        parcel.writeString(modo)
+        parcel.writeString(fecha)
     }
 
     override fun describeContents(): Int {

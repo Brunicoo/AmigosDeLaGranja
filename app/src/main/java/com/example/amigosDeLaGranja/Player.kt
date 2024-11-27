@@ -3,7 +3,7 @@ package com.example.amigosDeLaGranja
 import android.os.Parcel
 import android.os.Parcelable
 
-class Player(var name: String, val tries: MutableList<Try>) : Parcelable {
+class Player(var nombre: String, val partidas: MutableList<Try>) : Parcelable {
 
     constructor(parcel: Parcel) : this(
         parcel.readString() ?: "",
@@ -13,12 +13,12 @@ class Player(var name: String, val tries: MutableList<Try>) : Parcelable {
     )
 
     fun addTry(newTry: Try) {
-        this.tries.add(newTry)
+        this.partidas.add(newTry)
     }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
-        parcel.writeString(name)
-        parcel.writeList(tries)
+        parcel.writeString(nombre)
+        parcel.writeList(partidas)
     }
 
     override fun describeContents(): Int = 0
