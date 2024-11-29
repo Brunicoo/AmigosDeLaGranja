@@ -26,6 +26,7 @@ import kotlinx.coroutines.*
 import kotlinx.coroutines.launch
 import java.time.LocalDateTime
 import java.time.ZoneId
+import java.time.format.DateTimeFormatter
 import java.util.Date
 import kotlin.random.Random
 
@@ -99,7 +100,7 @@ class EasyGame : AppCompatActivity() {
 
                     val timeString = findViewById<TextView>(R.id.tiempo)
                     val seconds = stringToSeconds(timeString.text.toString())
-                    playersList[index].addTry(Try(seconds,errors,"FÁCIL",dateString))
+                    createTry(playersList, index, errors, seconds)
                     val background = findViewById<View>(R.id.finishBackground)
                     val frame = findViewById<ImageView>(R.id.finalFrame)
                     val image = findViewById<ImageView>(R.id.imageCongratulation)
@@ -122,7 +123,7 @@ class EasyGame : AppCompatActivity() {
                     buttonExit.visibility = View.VISIBLE
 
                     buttonReplay.setOnClickListener(){
-                        Tools.createActivity(this, TutorialHardActivity::class.java, index, playersList)
+                        Tools.createActivity(this, EasyGame::class.java, index, playersList)
                         mediaBandasonora.stop()
                         overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
                         finish()
@@ -172,6 +173,7 @@ class EasyGame : AppCompatActivity() {
         return (minuts * 60)+seconds
     }
 
+
     private fun generateSequenceAnimals(): MutableList<AnimalsEasy> {
         return listOf(AnimalsEasy(R.drawable.vaca,R.raw.vaca_sonido,200,300),
             AnimalsEasy(R.drawable.pato,R.raw.pato_sonido,150,150),
@@ -182,6 +184,17 @@ class EasyGame : AppCompatActivity() {
             AnimalsEasy(R.drawable.conejo,R.raw.conejo,150,150),
             AnimalsEasy(R.drawable.gallina,R.raw.gallina_sonido,150,150)).shuffled().toMutableList()
 
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    private fun createTry(playersList: MutableList<Player>, index: Int, errors : Int, seconds : Int) {
+        val date = LocalDateTime.now(ZoneId.systemDefault())
+        val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")
+        val dateString = date.format(formatter)
+
+        val newTry = Try(seconds, errors, "DIFÍCIL", dateString)
+        playersList[index].addTry(newTry)
+        Tools.writeOnJson(this, playersList, "resultados.json")
     }
 
     private fun applyListener(listaAnimales: MutableList<List<ImageView>>, commonClickListener: View.OnClickListener) {

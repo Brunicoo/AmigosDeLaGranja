@@ -521,6 +521,7 @@ class HardGame : AppCompatActivity() {
 
         val newTry = Try(seconds, counterErrors, "DIFÍCIL", dateString)
         playersList[index].addTry(newTry)
+        Tools.writeOnJson(this, playersList, "resultados.json")
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
