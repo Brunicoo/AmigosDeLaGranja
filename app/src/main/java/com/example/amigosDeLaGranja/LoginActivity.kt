@@ -29,11 +29,11 @@ class LoginActivity : AppCompatActivity() {
         val btonStart = findViewById(R.id.btonStart) as Button
         val userNameEditText = findViewById(R.id.userName) as EditText
         var difficulty: Boolean? = null
-        val playersList: MutableList<Player> = mutableListOf()
+        var playersList: MutableList<Player> = mutableListOf()
         val tries: MutableList<Try> = mutableListOf()
         var index: Int
 
-        /*leer el json y sino existe el usuario crear este nuevo y reescribirlo en el json directamente*/
+        playersList = Tools.readFromJson(this, "resultados.json")!!
 
 
 

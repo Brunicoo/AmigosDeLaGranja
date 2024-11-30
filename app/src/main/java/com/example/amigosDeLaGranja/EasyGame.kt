@@ -192,7 +192,7 @@ class EasyGame : AppCompatActivity() {
         val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")
         val dateString = date.format(formatter)
 
-        val newTry = Try(seconds, errors, "DIFÍCIL", dateString)
+        val newTry = Try(seconds, errors, "FÁCIL", dateString)
         playersList[index].addTry(newTry)
         Tools.writeOnJson(this, playersList, "resultados.json")
     }

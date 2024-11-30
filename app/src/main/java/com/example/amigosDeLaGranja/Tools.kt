@@ -6,6 +6,8 @@ import android.os.Build
 import android.os.Environment
 import android.widget.Toast
 import com.google.gson.Gson
+import com.google.gson.JsonSyntaxException
+import com.google.gson.reflect.TypeToken
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
@@ -31,18 +33,13 @@ class Tools {
                 return
             }
 
-            // Obtener la ruta de la carpeta "Descargas" en el almacenamiento externo
             val downloadsFolder = File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), "")
 
-
-            // Crear el archivo JSON
             val archivoJson = File(downloadsFolder, jsonFile)
 
-            // Convertir la lista de jugadores a JSON usando Gson
             val gson = Gson()
-            val json = gson.toJson(mapOf("miArrayList" to playersList))
+            val json = gson.toJson(mapOf("PLAYERS" to playersList))
 
-            // Escribir el JSON en el archivo
             try {
                 FileOutputStream(archivoJson).use { outputStream ->
                     outputStream.write(json.toByteArray())
@@ -50,6 +47,37 @@ class Tools {
                 Toast.makeText(context, "El archivo JSON se guardó correctamente en Descargas.", Toast.LENGTH_SHORT).show()
             } catch (e: IOException) {
                 Toast.makeText(context, "Error al guardar el archivo: ${e.message}", Toast.LENGTH_LONG).show()
+            }
+        }
+        fun readFromJson(context: Context, jsonFile: String): MutableList<Player>? {
+            if (Environment.getExternalStorageState() != Environment.MEDIA_MOUNTED &&
+                Environment.getExternalStorageState() != Environment.MEDIA_MOUNTED_READ_ONLY) {
+                Toast.makeText(context, "El almacenamiento externo no está disponible para lectura.", Toast.LENGTH_SHORT).show()
+                return null
+            }
+
+            val downloadsFolder = File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), "")
+            val archivoJson = File(downloadsFolder, jsonFile)
+
+            if (!archivoJson.exists()) {
+                Toast.makeText(context, "El archivo JSON no existe.", Toast.LENGTH_SHORT).show()
+                return null
+            }
+
+            return try {
+                val json = archivoJson.readText()
+
+                val gson = Gson()
+                val type = object : TypeToken<Map<String, List<Player>>>() {}.type
+                val data = gson.fromJson<Map<String, List<Player>>>(json, type)
+
+                ArrayList(data["PLAYERS"] ?: emptyList())
+            } catch (e: IOException) {
+                Toast.makeText(context, "Error al leer el archivo: ${e.message}", Toast.LENGTH_LONG).show()
+                null
+            } catch (e: JsonSyntaxException) {
+                Toast.makeText(context, "Error en el formato del JSON: ${e.message}", Toast.LENGTH_LONG).show()
+                null
             }
         }
     }
