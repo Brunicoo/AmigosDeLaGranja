@@ -49,7 +49,7 @@ class Tools {
                 Toast.makeText(context, "Error al guardar el archivo: ${e.message}", Toast.LENGTH_LONG).show()
             }
         }
-        fun readFromJson(context: Context, jsonFile: String): MutableList<Player>? {
+        fun readFromJson(context: Context, jsonFile: String, playersList: MutableList<Player>): MutableList<Player>? {
             if (Environment.getExternalStorageState() != Environment.MEDIA_MOUNTED &&
                 Environment.getExternalStorageState() != Environment.MEDIA_MOUNTED_READ_ONLY) {
                 Toast.makeText(context, "El almacenamiento externo no está disponible para lectura.", Toast.LENGTH_SHORT).show()
@@ -61,7 +61,8 @@ class Tools {
 
             if (!archivoJson.exists()) {
                 Toast.makeText(context, "El archivo JSON no existe.", Toast.LENGTH_SHORT).show()
-                return null
+
+                return playersList
             }
 
             return try {

@@ -33,7 +33,7 @@ class LoginActivity : AppCompatActivity() {
         val tries: MutableList<Try> = mutableListOf()
         var index: Int
 
-        playersList = Tools.readFromJson(this, "resultados.json")!!
+        playersList = Tools.readFromJson(this, "resultados.json", playersList)!!
 
 
 
