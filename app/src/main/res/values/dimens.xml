@@ -3,5 +3,8 @@
     <dimen name="midSize">110dp</dimen>
     <dimen name="low_size">80dp</dimen>
     <dimen name="big_dimension">140dp</dimen>
+    <dimen name="midSizeSilueta">130dp</dimen>
+    <dimen name="low_sizeSilueta">100dp</dimen>
+    <dimen name="big_dimensionSilueta">160dp</dimen>
     <dimen name="translationX_low_size">13dp</dimen>
 </resources>

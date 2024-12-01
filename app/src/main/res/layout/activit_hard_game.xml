@@ -84,8 +84,8 @@
 
     <ImageView
         android:id="@+id/imgSiluetaGallina"
-        android:layout_width="@dimen/low_size"
-        android:layout_height="@dimen/low_size"
+        android:layout_width="@dimen/low_sizeSilueta"
+        android:layout_height="@dimen/low_sizeSilueta"
         android:layout_margin="20dp"
         android:layout_gravity="top|start"
         android:translationX="0dp"
@@ -101,8 +101,8 @@
 
     <ImageView
         android:id="@+id/imgSiluetaCerdo"
-        android:layout_width="@dimen/midSize"
-        android:layout_height="@dimen/midSize"
+        android:layout_width="@dimen/midSizeSilueta"
+        android:layout_height="@dimen/midSizeSilueta"
         android:layout_margin="20dp"
         android:layout_gravity="top|start"
         android:translationX="0dp"
@@ -117,8 +117,8 @@
         android:translationY="290dp"/> <!-- Ajustar distancia vertical -->
     <ImageView
         android:id="@+id/imgOvejaSilueta"
-        android:layout_width="@dimen/midSize"
-        android:layout_height="@dimen/midSize"
+        android:layout_width="@dimen/midSizeSilueta"
+        android:layout_height="@dimen/midSizeSilueta"
         android:layout_margin="20dp"
         android:layout_gravity="top|start"
         android:translationX="0dp"
@@ -135,8 +135,8 @@
 
     <ImageView
         android:id="@+id/imgPatoSilueta"
-        android:layout_width="@dimen/low_size"
-        android:layout_height="@dimen/low_size"
+        android:layout_width="@dimen/low_sizeSilueta"
+        android:layout_height="@dimen/low_sizeSilueta"
         android:layout_margin="20dp"
         android:layout_gravity="top|start"
         android:translationX="0dp"
@@ -151,8 +151,8 @@
         android:translationY="540dp"/>
     <ImageView
         android:id="@+id/imgCaballoSilueta"
-        android:layout_width="@dimen/big_dimension"
-        android:layout_height="@dimen/big_dimension"
+        android:layout_width="@dimen/big_dimensionSilueta"
+        android:layout_height="@dimen/big_dimensionSilueta"
         android:layout_margin="20dp"
         android:layout_gravity="top|start"
         android:translationX="100dp"
@@ -167,8 +167,8 @@
         android:translationY="11dp"/>
     <ImageView
         android:id="@+id/imgPerroSilueta"
-        android:layout_width="@dimen/midSize"
-        android:layout_height="@dimen/midSize"
+        android:layout_width="@dimen/midSizeSilueta"
+        android:layout_height="@dimen/midSizeSilueta"
         android:layout_margin="20dp"
         android:layout_gravity="top|start"
         android:translationX="0dp"
@@ -183,8 +183,8 @@
         android:translationY="180dp"/>
     <ImageView
         android:id="@+id/imgConejoSilueta"
-        android:layout_width="@dimen/low_size"
-        android:layout_height="@dimen/low_size"
+        android:layout_width="@dimen/low_sizeSilueta"
+        android:layout_height="@dimen/low_sizeSilueta"
         android:layout_margin="20dp"
         android:layout_gravity="top|start"
         android:translationX="1140dp"
@@ -199,8 +199,8 @@
         android:translationY="280dp"/>
     <ImageView
         android:id="@+id/imgVacaSilueta"
-        android:layout_width="@dimen/big_dimension"
-        android:layout_height="@dimen/big_dimension"
+        android:layout_width="@dimen/big_dimensionSilueta"
+        android:layout_height="@dimen/big_dimensionSilueta"
         android:layout_margin="20dp"
         android:layout_gravity="top|start"
         android:translationX="11dp"
@@ -215,8 +215,8 @@
         android:translationY="450dp"/>
     <ImageView
         android:id="@+id/imgLoroSilueta"
-        android:layout_width="@dimen/low_size"
-        android:layout_height="@dimen/low_size"
+        android:layout_width="@dimen/low_sizeSilueta"
+        android:layout_height="@dimen/low_sizeSilueta"
         android:layout_margin="20dp"
         android:layout_gravity="top|start"
         android:translationX="1155dp"
@@ -231,8 +231,8 @@
         android:translationY="560dp"/>
     <ImageView
         android:id="@+id/imgBurroSilueta"
-        android:layout_width="@dimen/big_dimension"
-        android:layout_height="@dimen/big_dimension"
+        android:layout_width="@dimen/big_dimensionSilueta"
+        android:layout_height="@dimen/big_dimensionSilueta"
         android:layout_margin="20dp"
         android:layout_gravity="top|start"
         android:translationX="1080dp"
