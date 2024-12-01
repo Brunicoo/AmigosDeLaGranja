@@ -13,6 +13,7 @@ import android.util.Log
 import android.view.Display
 import android.view.MotionEvent
 import android.view.View
+import android.view.animation.AnimationUtils
 import android.widget.Button
 import android.widget.FrameLayout
 import android.widget.ImageView
@@ -545,6 +546,7 @@ class HardGame : AppCompatActivity() {
         animalsAdded1 = false
         animalsAdded2 = false
         animalsAdded3 = false
+        animacionFelicidades()
         reiniciarJuego.setOnClickListener {
             Tools.createActivity(this, HardGame::class.java, index, playersList)
             mediaPlayer2.stop()
@@ -560,4 +562,12 @@ class HardGame : AppCompatActivity() {
             finish()
         }
     }
+    private fun animacionFelicidades(){
+        val felicidades = findViewById(R.id.felcitacionFinal) as ImageView
+        val animation = AnimationUtils.loadAnimation(this, R.anim.fade_in_zoom)
+
+        // Aplica la animación cuando el ImageView aparezca
+        felicidades.startAnimation(animation)
+    }
+
 }

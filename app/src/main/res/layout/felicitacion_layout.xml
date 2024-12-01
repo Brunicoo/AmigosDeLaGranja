@@ -6,15 +6,14 @@
     android:layout_gravity="center"
     android:layout_marginBottom="80dp"
     android:background="@drawable/animal_frame_design_hard"
-    android:visibility="gone"
-    >
+    android:visibility="gone">
 
 
     <ImageView
         android:id="@+id/felcitacionFinal"
-        android:layout_width="350dp"
-        android:layout_height="350dp"
-        android:layout_marginLeft="85dp"
+        android:layout_width="400dp"
+        android:layout_height="400dp"
+        android:layout_marginLeft="62dp"
         android:layout_marginTop="0dp"
         android:background="@drawable/felicidadesd_definitivo"
         />
