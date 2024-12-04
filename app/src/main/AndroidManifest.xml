@@ -43,6 +43,7 @@
 
                 <activity
                     android:name="com.example.amigosDeLaGranja.EasyGame"
+
                     android:exported="true">
                 </activity>
 
@@ -60,7 +61,6 @@
             android:name="com.example.amigosDeLaGranja.AudioActivity_Hard"
             android:exported="true">
         </activity>
-
             </application>
             <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
             <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
