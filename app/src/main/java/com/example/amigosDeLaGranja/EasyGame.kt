@@ -10,6 +10,7 @@ import android.os.Looper
 import android.util.TypedValue
 import android.view.View
 import android.view.ViewTreeObserver
+import android.view.animation.AnimationUtils
 import android.widget.Button
 import android.widget.FrameLayout
 import android.widget.HorizontalScrollView
@@ -86,7 +87,7 @@ class EasyGame : AppCompatActivity() {
             val imageView = view as ImageView
             if(imageView.drawable.constantState == searchImage.drawable.constantState){
                 val mediaAnimal = siquenceAnimals[0].sound?.let { MediaPlayer.create(this, it) }
-                mediaAnimal?.setVolume(0.3f,0.3f)
+                mediaAnimal?.setVolume(0.5f,0.5f)
                 mediaAnimal?.start()
                 siquenceAnimals.removeAt(0)
                 points ++
@@ -112,6 +113,7 @@ class EasyGame : AppCompatActivity() {
                     val errorImg = findViewById<ImageView>(R.id.error_final)
                     val buttonReplay = findViewById<Button>(R.id.button_repetir_final)
                     val buttonExit = findViewById<Button>(R.id.button_salir_final)
+                    val animation = AnimationUtils.loadAnimation(this, R.anim.fade_in_zoom)
                     background.visibility = View.VISIBLE
                     frame.visibility = View.VISIBLE
                     image.visibility = View.VISIBLE
@@ -121,6 +123,7 @@ class EasyGame : AppCompatActivity() {
                     errorImg.visibility = View.VISIBLE
                     buttonReplay.visibility = View.VISIBLE
                     buttonExit.visibility = View.VISIBLE
+                    image.startAnimation(animation)
 
                     buttonReplay.setOnClickListener(){
                         Tools.createActivity(this, EasyGame::class.java, index, playersList)
@@ -175,14 +178,14 @@ class EasyGame : AppCompatActivity() {
 
 
     private fun generateSequenceAnimals(): MutableList<AnimalsEasy> {
-        return listOf(AnimalsEasy(R.drawable.vaca,R.raw.vaca_sonido,200,300),
-            AnimalsEasy(R.drawable.pato,R.raw.pato_sonido,150,150),
-            AnimalsEasy(R.drawable.perro,R.raw.perro_sonido,200,150),
-            AnimalsEasy(R.drawable.caballo,R.raw.caballo_sonido,250,350),
-            AnimalsEasy(R.drawable.oveja,R.raw.oveja,200,200),
-            AnimalsEasy(R.drawable.cerdo,R.raw.cerdo_sonido,300,250),
-            AnimalsEasy(R.drawable.conejo,R.raw.conejo,150,150),
-            AnimalsEasy(R.drawable.gallina,R.raw.gallina_sonido,150,150)).shuffled().toMutableList()
+        return listOf(AnimalsEasy(R.drawable.vaca,R.raw.vaca_sonido,300,450),
+            AnimalsEasy(R.drawable.pato,R.raw.pato_sonido,180,180),
+            AnimalsEasy(R.drawable.perro,R.raw.perro_sonido,250,200),
+            AnimalsEasy(R.drawable.caballo,R.raw.caballo_sonido,420,300),
+            AnimalsEasy(R.drawable.oveja,R.raw.oveja,250,250),
+            AnimalsEasy(R.drawable.cerdo,R.raw.cerdo_sonido,350,300),
+            AnimalsEasy(R.drawable.conejo,R.raw.conejo,200,200),
+            AnimalsEasy(R.drawable.gallina,R.raw.gallina_sonido,200,200)).shuffled().toMutableList()
 
     }
 
@@ -233,7 +236,7 @@ class EasyGame : AppCompatActivity() {
         var positionY : Int
         var listaIndexAnimales = MutableList(8) {it}
         for (i in 0 until 8) {
-            positionY = Random.nextInt(500)+450
+            positionY = Random.nextInt(500)+350
             val index = listaIndexAnimales[Random.nextInt(listaIndexAnimales.size)]
             listaIndexAnimales.remove(index)
             do {
