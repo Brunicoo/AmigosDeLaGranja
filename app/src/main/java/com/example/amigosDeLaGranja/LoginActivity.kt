@@ -95,17 +95,17 @@ class LoginActivity : AppCompatActivity() {
         tries: MutableList<Try>,
         userName: String
     ): Int {
-        val userExists = playersList.find { it.name.equals(userName, ignoreCase = true) }
+        val userExists = playersList.find { it.nombre.equals(userName, ignoreCase = true) }
         var index: Int
 
         if (userExists == null) {
             val player = Player(userName, tries)
             playersList.add(player)
-            index = playersList.indexOfFirst { it.name == player.name }
+            index = playersList.indexOfFirst { it.nombre == player.nombre }
 
         } else {
             val player = userExists
-            index = playersList.indexOfFirst { it.name == player.name }
+            index = playersList.indexOfFirst { it.nombre == player.nombre }
 
 
         }

@@ -197,7 +197,7 @@ class EasyGame : AppCompatActivity() {
 
         val newTry = Try(seconds, errors, "FÁCIL", dateString)
         playersList[index].addTry(newTry)
-        Tools.writeOnJson(this, playersList, "resultados.json")
+        Tools.writeOnJson(this, "resultados.json", playersList)
     }
 
     private fun applyListener(listaAnimales: MutableList<List<ImageView>>, commonClickListener: View.OnClickListener) {

@@ -26,19 +26,17 @@ class Tools {
             context.startActivity(intent)
         }
 
-        fun writeOnJson(context: Context, playersList: List<Player>, jsonFile: String) {
-
+        fun writeOnJson(context: Context, jsonFile: String, playersList: List<Player>) {
             if (Environment.getExternalStorageState() != Environment.MEDIA_MOUNTED) {
                 Toast.makeText(context, "El almacenamiento externo no está disponible.", Toast.LENGTH_SHORT).show()
                 return
             }
 
             val downloadsFolder = File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), "")
-
             val archivoJson = File(downloadsFolder, jsonFile)
 
             val gson = Gson()
-            val json = gson.toJson(mapOf("PLAYERS" to playersList))
+            val json = gson.toJson(playersList) // Aquí conviertes directamente la lista
 
             try {
                 FileOutputStream(archivoJson).use { outputStream ->
@@ -49,6 +47,7 @@ class Tools {
                 Toast.makeText(context, "Error al guardar el archivo: ${e.message}", Toast.LENGTH_LONG).show()
             }
         }
+
         fun readFromJson(context: Context, jsonFile: String, playerslist: MutableList<Player>): MutableList<Player>? {
             if (Environment.getExternalStorageState() != Environment.MEDIA_MOUNTED &&
                 Environment.getExternalStorageState() != Environment.MEDIA_MOUNTED_READ_ONLY) {
@@ -68,10 +67,10 @@ class Tools {
                 val json = archivoJson.readText()
 
                 val gson = Gson()
-                val type = object : TypeToken<Map<String, List<Player>>>() {}.type
-                val data = gson.fromJson<Map<String, List<Player>>>(json, type)
+                val type = object : TypeToken<List<Player>>() {}.type // Cambiado a lista de jugadores
+                val data = gson.fromJson<List<Player>>(json, type)
 
-                ArrayList(data["PLAYERS"] ?: emptyList())
+                ArrayList(data) // Retorna la lista de jugadores deserializada
             } catch (e: IOException) {
                 Toast.makeText(context, "Error al leer el archivo: ${e.message}", Toast.LENGTH_LONG).show()
                 null
@@ -80,5 +79,6 @@ class Tools {
                 null
             }
         }
+
     }
 }
