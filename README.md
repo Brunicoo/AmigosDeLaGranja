@@ -41,37 +41,8 @@ Este modo desafía a los jugadores con un **juego de arrastrar y soltar**. Se pr
 
 ## ⚙️ Tecnologías Usadas
 
-- **Kotlin**: Para la programación de la aplicación en Android.
-- **Firebase**: Para gestionar la autenticación de usuarios.
-- **OpenGL/VR (si se usa un mapa 360)**: Para crear la experiencia interactiva del mapa en 360 grados.
-
----
-
-## 📝 Contribuciones
-
-Si deseas contribuir al proyecto, ¡nos encantaría recibir tus aportes! Puedes hacerlo de la siguiente manera:
-
-1. Haz un fork del repositorio.
-2. Crea una rama nueva (`git checkout -b feature/nueva-caracteristica`).
-3. Realiza tus cambios y haz commit (`git commit -am 'Añadir nueva característica'`).
-4. Envía un pull request para que podamos revisar tus cambios.
-
----
-
-## 📅 Próximas características
-
-- Añadir un sistema de puntuaciones y logros.
-- Mejorar la interfaz con más animales y escenarios.
-- Agregar opciones multijugador.
-
----
-
-## 📞 Contacto
-
-Si tienes alguna pregunta o sugerencia, no dudes en ponerte en contacto con nosotros:
-
-- **Correo electrónico**: contacto@tugame.com
-- **Redes sociales**: [@tugame](https://twitter.com/tugame)
+- **Kotlin**: Lenguaje utilizado para desarrollar la aplicación en Android.
+- **JSON**: Para almacenar y manejar los datos, como la información de los animales, en formato JSON.
 
 ---
 
